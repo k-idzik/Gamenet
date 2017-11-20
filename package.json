@@ -1,11 +1,11 @@
 {
-  "name": "Logins",
+  "name": "Gamenet",
   "version": "1.0.0",
   "engines": {
-    "node": "7.5.0",
-    "npm": "4.0.5"
+    "node": "8.4.0",
+    "npm": "5.3.0"
   },
-  "description": "A Simple Login Example using Node.js, Mongo and Redis",
+  "description": "A place to connect with pals over games",
   "main": "./server/app.js",
   "scripts": {
     "buildLoginBundle": "babel ./client/login ./client/helper --presets react --out-file ./hosted/loginBundle.js",
@@ -18,14 +18,16 @@
     "pretest": "eslint ./server --fix",
     "test": "echo \"Tests complete\""
   },
-  "keywords": [
-    "Node",
-    "MVC",
-    "Redis",
-    "Login"
-  ],
-  "author": "Cody Van De Mark",
-  "license": "Apache 2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k-idzik/one-big-chat.git"
+  },
+  "author": "Kevin Idzik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k-idzik/one-big-chat.git/issues"
+  },
+  "homepage": "https://github.com/k-idzik/one-big-chat.git#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
     "compression": "^1.6.1",
