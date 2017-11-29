@@ -45,9 +45,10 @@ const LoginWindow = (props) => {
       <input id='pass' type='password' name='pass' placeholder='Password' />
       <input type='hidden' name='_csrf' value={props.csrf} />
       <input className='formSubmit' type='submit' value='Sign in' />
-      <input className='formChange' type='button' value='Sign up' onMouseUp={createSignupWindow} />
+      <input className='formChange' type='button' value='Sign up' />
     </form>
   );
+  //onMouseUp={createSignupWindow(props.csrf)} 
 };
 
 //Signup UI
@@ -60,29 +61,49 @@ const SignupWindow = (props) => {
       <input id='pass2' type='password' name='pass2' placeholder='Retype password' />
       <input type='hidden' name='_csrf' value={props.csrf} />
       <input className='formSubmit' type='submit' value='Sign up' />
-      <input className='formChange' type='button' value='Sign in' onMouseUp={createLoginWindow}/>
+      <input className='formChange' type='button' value='Sign in' />
     </form>
   );
+  //onMouseUp={createLoginWindow(props.csrf)}
 };
 
 //Login rendering
 const createLoginWindow = (csrf) => {
+    console.dir(csrf);
+  
   ReactDOM.render(
     <LoginWindow csrf={csrf} />, //UI element to be created
     document.querySelector('#content'), //Render target
   );
   
-  //document.querySelector('#content').style.display = 'flex';
+  //This is dumb, since it's just adding event listeners if the user spams back and forth
+  //But it's the quickest way, and fixes csrf garbage
+  document.querySelector('.formChange').addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    createSignupWindow(csrf);
+    return false;
+  });
+  
+  document.querySelector('.title').style.marginTop = '5%';
 };
 
 //Signup rendering
 const createSignupWindow = (csrf) => {
+    console.dir(csrf);
+  
   ReactDOM.render(
     <SignupWindow csrf={csrf} />, //UI element to be created
     document.querySelector('#content'), //Render target
   );
   
-  //document.querySelector('#content').style.display = 'block';
+  //This is dumb, since it's just adding event listeners if the user spams back and forth
+  //But it's the quickest way, and fixes csrf garbage
+  document.querySelector('.formChange').addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    createLoginWindow(csrf);
+    return false;
+  });
+  
   document.querySelector('.title').style.marginTop = '2%';
 };
 
