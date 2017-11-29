@@ -42,21 +42,17 @@ var handleSignup = function handleSignup(e) {
 var LoginWindow = function LoginWindow(props) {
   return React.createElement(
     'form',
-    { id: 'loginForm', name: 'loginForm', onSubmit: handleLogin, action: '/login', method: 'POST', className: 'mainForm' },
+    { id: 'loginForm', name: 'loginForm', onSubmit: handleLogin, action: '/login', method: 'POST', className: 'loginForm' },
     React.createElement(
-      'label',
-      { htmlFor: 'username' },
-      'Username: '
+      'h1',
+      { className: 'title' },
+      'The League of Gamers'
     ),
-    React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'username' }),
-    React.createElement(
-      'label',
-      { htmlFor: 'pass' },
-      'Password: '
-    ),
-    React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'password' }),
+    React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'Username' }),
+    React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'Password' }),
     React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
-    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign in' })
+    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign in' }),
+    React.createElement('input', { className: 'formChange', type: 'button', value: 'Sign up', onMouseUp: createSignupWindow })
   );
 };
 
@@ -64,27 +60,18 @@ var LoginWindow = function LoginWindow(props) {
 var SignupWindow = function SignupWindow(props) {
   return React.createElement(
     'form',
-    { id: 'signupForm', name: 'signupForm', onSubmit: handleSignup, action: '/signup', method: 'POST', className: 'mainForm' },
+    { id: 'signupForm', name: 'signupForm', onSubmit: handleSignup, action: '/signup', method: 'POST', className: 'loginForm' },
     React.createElement(
-      'label',
-      { htmlFor: 'username' },
-      'Username: '
+      'h1',
+      { className: 'title' },
+      'The League of Gamers'
     ),
-    React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'username' }),
-    React.createElement(
-      'label',
-      { htmlFor: 'pass' },
-      'Password: '
-    ),
-    React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'password' }),
-    React.createElement(
-      'label',
-      { htmlFor: 'pass2' },
-      'Password: '
-    ),
-    React.createElement('input', { id: 'pass2', type: 'password', name: 'pass2', placeholder: 'retype password' }),
+    React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'Username' }),
+    React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'Password' }),
+    React.createElement('input', { id: 'pass2', type: 'password', name: 'pass2', placeholder: 'Retype password' }),
     React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
-    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign up' })
+    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign up' }),
+    React.createElement('input', { className: 'formChange', type: 'button', value: 'Sign in', onMouseUp: createLoginWindow })
   );
 };
 
@@ -93,6 +80,8 @@ var createLoginWindow = function createLoginWindow(csrf) {
   ReactDOM.render(React.createElement(LoginWindow, { csrf: csrf }), //UI element to be created
   document.querySelector('#content') //Render target
   );
+
+  //document.querySelector('#content').style.display = 'flex';
 };
 
 //Signup rendering
@@ -100,6 +89,9 @@ var createSignupWindow = function createSignupWindow(csrf) {
   ReactDOM.render(React.createElement(SignupWindow, { csrf: csrf }), //UI element to be created
   document.querySelector('#content') //Render target
   );
+
+  //document.querySelector('#content').style.display = 'block';
+  document.querySelector('.title').style.marginTop = '2%';
 };
 
 //Button events

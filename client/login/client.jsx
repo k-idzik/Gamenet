@@ -39,13 +39,13 @@ const handleSignup = (e) => {
 //Login UI
 const LoginWindow = (props) => {
   return(
-    <form id='loginForm' name='loginForm' onSubmit={handleLogin} action='/login' method='POST' className='mainForm'>
-      <label htmlFor='username'>Username: </label>
-      <input id='user' type='text' name='username' placeholder='username' />
-      <label htmlFor='pass'>Password: </label>
-      <input id='pass' type='password' name='pass' placeholder='password' />
+    <form id='loginForm' name='loginForm' onSubmit={handleLogin} action='/login' method='POST' className='loginForm'>
+      <h1 className='title'>The League of Gamers</h1>
+      <input id='user' type='text' name='username' placeholder='Username' />
+      <input id='pass' type='password' name='pass' placeholder='Password' />
       <input type='hidden' name='_csrf' value={props.csrf} />
       <input className='formSubmit' type='submit' value='Sign in' />
+      <input className='formChange' type='button' value='Sign up' onMouseUp={createSignupWindow} />
     </form>
   );
 };
@@ -53,15 +53,14 @@ const LoginWindow = (props) => {
 //Signup UI
 const SignupWindow = (props) => {
   return(
-    <form id='signupForm' name='signupForm' onSubmit={handleSignup} action='/signup' method='POST' className='mainForm'>
-      <label htmlFor='username'>Username: </label>
-      <input id='user' type='text' name='username' placeholder='username' />
-      <label htmlFor='pass'>Password: </label>
-      <input id='pass' type='password' name='pass' placeholder='password' />
-      <label htmlFor='pass2'>Password: </label>
-      <input id='pass2' type='password' name='pass2' placeholder='retype password' />
+    <form id='signupForm' name='signupForm' onSubmit={handleSignup} action='/signup' method='POST' className='loginForm'>
+      <h1 className='title'>The League of Gamers</h1>
+      <input id='user' type='text' name='username' placeholder='Username' />
+      <input id='pass' type='password' name='pass' placeholder='Password' />
+      <input id='pass2' type='password' name='pass2' placeholder='Retype password' />
       <input type='hidden' name='_csrf' value={props.csrf} />
       <input className='formSubmit' type='submit' value='Sign up' />
+      <input className='formChange' type='button' value='Sign in' onMouseUp={createLoginWindow}/>
     </form>
   );
 };
@@ -70,16 +69,21 @@ const SignupWindow = (props) => {
 const createLoginWindow = (csrf) => {
   ReactDOM.render(
     <LoginWindow csrf={csrf} />, //UI element to be created
-    document.querySelector('#content') //Render target
+    document.querySelector('#content'), //Render target
   );
+  
+  //document.querySelector('#content').style.display = 'flex';
 };
 
 //Signup rendering
 const createSignupWindow = (csrf) => {
   ReactDOM.render(
     <SignupWindow csrf={csrf} />, //UI element to be created
-    document.querySelector('#content') //Render target
+    document.querySelector('#content'), //Render target
   );
+  
+  //document.querySelector('#content').style.display = 'block';
+  document.querySelector('.title').style.marginTop = '2%';
 };
 
 //Button events
