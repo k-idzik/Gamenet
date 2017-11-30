@@ -59,12 +59,12 @@ const signup = (request, response) => {
 
   // Make sure all fields are used
   if (!req.body.username || !req.body.pass || !req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! All fields are required' });
+    return res.status(400).json({ error: 'All fields are required!' });
   }
 
   // Make sure passwords match
   if (req.body.pass !== req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! Passwords do not match' });
+    return res.status(400).json({ error: 'Passwords do not match!' });
   }
 
   return Account.AccountModel.generateHash(req.body.pass, (salt, hash) => {
@@ -89,10 +89,10 @@ const signup = (request, response) => {
       console.log(err);
 
       if (err.code === 11000) {
-        return res.status(400).json({ error: 'Username already in use' });
+        return res.status(400).json({ error: 'Username already taken!' });
       }
 
-      return res.status(400).json({ error: 'An error occured' });
+      return res.status(400).json({ error: 'An error occured!' });
     });
   });
 };

@@ -14,7 +14,7 @@ const csrf = require('csurf'); // Prevent Cross-Site-Request-Forgery
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000; // Node server connection
 
-const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/DomoMaker'; // MongoDB database connection
+const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/TheLeagueOfGamers'; // MongoDB database connection
 
 // Connect to the database
 mongoose.connect(dbURL, (err) => {
@@ -53,7 +53,7 @@ app.use(session({
     port: redisURL.port,
     pass: redisPASS,
   }),
-  secret: 'Domo Arigato', // Seed for hashing/unique session keys
+  secret: 'This was a mistake', // Seed for hashing/unique session keys
   resave: true, // Refresh the key to keep it active
   saveUninitialized: true, // Always make sessions even when not logged in
   cookie: {

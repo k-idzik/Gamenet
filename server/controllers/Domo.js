@@ -6,7 +6,7 @@ const makerPage = (req, res) => {
   Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
-      return res.status(400).json({ error: 'An error occurred' });
+      return res.status(400).json({ error: 'An error occurred!' });
     }
 
     // Add tokens here, where render data is submitted
@@ -21,7 +21,7 @@ const getDomos = (request, response) => {
   return Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
-      return res.status(400).json({ error: 'An error occurred' });
+      return res.status(400).json({ error: 'An error occurred!' });
     }
 
     return res.json({ domos: docs });
@@ -30,7 +30,7 @@ const getDomos = (request, response) => {
 
 const makeDomo = (req, res) => {
   if (!req.body.name || !req.body.age) {
-    return res.status(400).json({ error: 'RAWR! Both name and age are required' });
+    return res.status(400).json({ error: 'Both name and age are required!' });
   }
 
   const domoData = {
@@ -49,10 +49,10 @@ const makeDomo = (req, res) => {
     console.log(err);
 
     if (err.code === 11000) {
-      return res.status(400).json({ error: 'Domo already exists' });
+      return res.status(400).json({ error: 'Domo already exists!' });
     }
 
-    return res.status(400).json({ error: 'An error occurred' });
+    return res.status(400).json({ error: 'An error occurred!' });
   });
 
   return domoPromise;
