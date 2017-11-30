@@ -1,10 +1,8 @@
 const handleError = (message) => {
-  $('#errorMessage').text(message);
-  $('#domoMessage').animate({ width: 'toggle' }, 350);
+  document.querySelector('#errorMessage').textContent = message;
 };
 
 const redirect = (response) => {
-  $('#domoMessage').animate({ width: 'hide' }, 350);
   window.location = response.redirect;
 };
 

@@ -15,17 +15,28 @@ html, body {
   height: 300px;
   margin-top: 15%;
 }
+/**/
+#loginContent {
+  background-color: #8B0000;
+  display: flex;
+  height: 300px;
+  margin-top: 15%;
+}
 
-#logo {
+/*#logo {
   border-radius: 8px;
   float:left;
   height: 40px;
   padding-top: 5px;
   width: 40px;
-}
+}*/
 
 nav {
   background-color: #8B0000;
+  border-bottom: solid;
+  border-bottom-style: groove; /*Groovy*/
+  border-bottom-color: #BB0000;
+  border-bottom-width: 1px;
   height: 50px;
   width: 100%;
 }
@@ -33,28 +44,30 @@ nav {
 nav:nth-child(1) {
   padding-left: 25px;
 }
-
+/**/
 .navlink {
   color: white;
-  float: left;
-  font-size: 1.3em;
-  padding: 5px;
-  padding-left: 20px;
-  padding-top: 12px;
+  float: right;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  /*padding: 5px;*/
+  margin-right: 10px;
+  padding-top: 15px;
 }
-
+/**/
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
-  background-color: #8B0000;
-  border-radius: 2px;
+  border-bottom-color: #8B0000;
   color: white;
   padding: 5px;
   text-decoration: none;
-  transition: background-color 0.4s ease;
 }
-
+/**/
 .navlink a:hover {
-  background-color: #BB0000;
-  transition: background-color 0.8s ease;
+  border-bottom: solid;
+  border-bottom-color: white;
+  border-bottom-width: 4px;
+  padding-bottom: 12px;
+  transition: border-bottom-color .65s ease-in-out;
 }
 
 .domoForm {
@@ -120,6 +133,7 @@ nav:nth-child(1) {
 #user, #pass, #pass2 {
   border-radius: 6px;
   display: block;
+  font-family: 'Raleway', sans-serif;
   font-size: 20px;
   margin: auto;
   margin-top: 10px;
@@ -138,6 +152,7 @@ nav:nth-child(1) {
   border-radius: 2px;
   border-width: 1px;
   color: white;
+  font-family: 'Raleway', sans-serif;
   font-size: 24px;
   margin-left: 15px;
   margin-top: 10px;
@@ -154,6 +169,7 @@ nav:nth-child(1) {
   border-radius: 2px;
   border-width: 1px;
   color: white;
+  font-family: 'Raleway', sans-serif;
   font-size: 24px;
   margin-top: 10px;
   padding: 3px 0px;
@@ -171,8 +187,17 @@ nav:nth-child(1) {
   background-color: #BB0000;
   transition: background-color 0.4s ease;
 }
+/**/
+#errorMessage {
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  margin-top: 5px;
+  font-style: italic;
+  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red;
+}
 
-#domoMessage {
+/*#domoMessage {
   display:none;
   height: 650px;
   overflow: hidden;
@@ -202,6 +227,7 @@ nav:nth-child(1) {
   font-style: italic;
   font-weight: bold;
 }
+*/
 
 #domo {
   -ms-transform: rotate(330deg);

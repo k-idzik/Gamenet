@@ -3,7 +3,7 @@
 var handleDomo = function handleDomo(e) {
   e.preventDefault();
 
-  $('#domoMessage').animate({ width: 'hide' }, 350);
+  //$('#domoMessage').animate({width: 'hide'}, 350);
 
   if ($('#domoName').val() == '' || $('#domoAge').val() == '') {
     handleError('RAWR! All fields are required');
@@ -115,12 +115,10 @@ $(document).ready(function () {
 'use strict';
 
 var handleError = function handleError(message) {
-  $('#errorMessage').text(message);
-  $('#domoMessage').animate({ width: 'toggle' }, 350);
+  document.querySelector('#errorMessage').textContent = message;
 };
 
 var redirect = function redirect(response) {
-  $('#domoMessage').animate({ width: 'hide' }, 350);
   window.location = response.redirect;
 };
 

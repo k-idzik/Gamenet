@@ -22,18 +22,18 @@ const login = (request, response) => {
   const req = request;
   const res = response;
 
-    // Cast to strings to cover up some security flaws
+  // Cast to strings to cover up some security flaws
   const username = `${req.body.username}`;
   const password = `${req.body.pass}`;
 
-    // Make sure all fields are used
+  // Make sure all fields are used
   if (!username || !password) {
-    return res.status(400).json({ error: 'RAWR! All fields are required' });
+    return res.status(400).json({ error: 'All fields are required!' });
   }
 
   return Account.AccountModel.authenticate(username, password, (err, account) => {
     if (err || !account) {
-      return res.status(401).json({ error: 'Wrong username or password' });
+      return res.status(401).json({ error: 'Wrong username or password!' });
     }
 
     // Store the account information in the session object
@@ -97,8 +97,14 @@ const signup = (request, response) => {
   });
 };
 
+const settingsPage = (req, res) => {
+  // Add tokens here, where render data is submitted
+  res.render('settings', { csrfToken: req.csrfToken() });
+};
+
 module.exports.getToken = getToken;
 module.exports.loginPage = loginPage;
 module.exports.login = login;
 module.exports.logout = logout;
 module.exports.signup = signup;
+module.exports.settingsPage = settingsPage;

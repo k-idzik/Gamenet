@@ -3,14 +3,10 @@
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
 
-  $('#domoMessage').animate({ width: 'hide' }, 350);
-
   if ($('#user').val() == '' || $('#pass').val() == '') {
-    handleError('RAWR! Username or password is empty');
+    handleError('Enter a username and password!');
     return false;
   }
-
-  console.log($('input[name=_csrf]').val());
 
   sendAjax('POST', $('#loginForm').attr('action'), $('#loginForm').serialize(), redirect);
 
@@ -20,15 +16,13 @@ var handleLogin = function handleLogin(e) {
 var handleSignup = function handleSignup(e) {
   e.preventDefault();
 
-  $('#domoMessage').animate({ width: 'hide' }, 350);
-
   if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
-    handleError('RAWR! All fields are required');
+    handleError('All fields are required to sign up!');
     return false;
   }
 
   if ($('#pass').val() !== $('#pass2').val()) {
-    handleError('RAWR! Passwords do not match');
+    handleError('Passwords do not match!');
     return false;
   }
 
@@ -52,9 +46,9 @@ var LoginWindow = function LoginWindow(props) {
     React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'Password' }),
     React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
     React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign in' }),
-    React.createElement('input', { className: 'formChange', type: 'button', value: 'Sign up' })
+    React.createElement('input', { className: 'formChange', type: 'button', value: 'Sign up' }),
+    React.createElement('h3', { id: 'errorMessage' })
   );
-  //onMouseUp={createSignupWindow(props.csrf)} 
 };
 
 //Signup UI
@@ -72,17 +66,15 @@ var SignupWindow = function SignupWindow(props) {
     React.createElement('input', { id: 'pass2', type: 'password', name: 'pass2', placeholder: 'Retype password' }),
     React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
     React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign up' }),
-    React.createElement('input', { className: 'formChange', type: 'button', value: 'Sign in' })
+    React.createElement('input', { className: 'formChange', type: 'button', value: 'Sign in' }),
+    React.createElement('h3', { id: 'errorMessage' })
   );
-  //onMouseUp={createLoginWindow(props.csrf)}
 };
 
 //Login rendering
 var createLoginWindow = function createLoginWindow(csrf) {
-  console.dir(csrf);
-
   ReactDOM.render(React.createElement(LoginWindow, { csrf: csrf }), //UI element to be created
-  document.querySelector('#content') //Render target
+  document.querySelector('#loginContent') //Render target
   );
 
   //This is dumb, since it's just adding event listeners if the user spams back and forth
@@ -98,10 +90,8 @@ var createLoginWindow = function createLoginWindow(csrf) {
 
 //Signup rendering
 var createSignupWindow = function createSignupWindow(csrf) {
-  console.dir(csrf);
-
   ReactDOM.render(React.createElement(SignupWindow, { csrf: csrf }), //UI element to be created
-  document.querySelector('#content') //Render target
+  document.querySelector('#loginContent') //Render target
   );
 
   //This is dumb, since it's just adding event listeners if the user spams back and forth
@@ -117,21 +107,6 @@ var createSignupWindow = function createSignupWindow(csrf) {
 
 //Button events
 var setup = function setup(csrf) {
-  var loginButton = document.querySelector('#loginButton');
-  var signupButton = document.querySelector('#signupButton');
-
-  signupButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    createSignupWindow(csrf);
-    return false;
-  });
-
-  loginButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    createLoginWindow(csrf);
-    return false;
-  });
-
   createLoginWindow(csrf); //Render the login window by default
 };
 
@@ -149,12 +124,10 @@ $(document).ready(function () {
 'use strict';
 
 var handleError = function handleError(message) {
-  $('#errorMessage').text(message);
-  $('#domoMessage').animate({ width: 'toggle' }, 350);
+  document.querySelector('#errorMessage').textContent = message;
 };
 
 var redirect = function redirect(response) {
-  $('#domoMessage').animate({ width: 'hide' }, 350);
   window.location = response.redirect;
 };
 

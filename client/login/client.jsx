@@ -1,14 +1,10 @@
 const handleLogin = (e) => {
   e.preventDefault();
     
-  $('#domoMessage').animate({width: 'hide'}, 350);
-    
   if ($('#user').val() == '' || $('#pass').val() == '') {
-    handleError('RAWR! Username or password is empty');
+    handleError('Enter a username and password!');
     return false;
   }
-    
-  console.log($('input[name=_csrf]').val());
   
   sendAjax('POST', $('#loginForm').attr('action'), $('#loginForm').serialize(), redirect);
   
@@ -18,15 +14,13 @@ const handleLogin = (e) => {
 const handleSignup = (e) => {
   e.preventDefault();
     
-  $('#domoMessage').animate({width: 'hide'}, 350);
-    
   if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
-    handleError('RAWR! All fields are required');
+    handleError('All fields are required to sign up!');
     return false;
   }
     
   if ($('#pass').val() !== $('#pass2').val()) {
-    handleError('RAWR! Passwords do not match');
+    handleError('Passwords do not match!');
     return false;
   }
   
@@ -46,9 +40,9 @@ const LoginWindow = (props) => {
       <input type='hidden' name='_csrf' value={props.csrf} />
       <input className='formSubmit' type='submit' value='Sign in' />
       <input className='formChange' type='button' value='Sign up' />
+      <h3 id='errorMessage'></h3>
     </form>
   );
-  //onMouseUp={createSignupWindow(props.csrf)} 
 };
 
 //Signup UI
@@ -62,18 +56,16 @@ const SignupWindow = (props) => {
       <input type='hidden' name='_csrf' value={props.csrf} />
       <input className='formSubmit' type='submit' value='Sign up' />
       <input className='formChange' type='button' value='Sign in' />
+      <h3 id='errorMessage'></h3>
     </form>
   );
-  //onMouseUp={createLoginWindow(props.csrf)}
 };
 
 //Login rendering
 const createLoginWindow = (csrf) => {
-    console.dir(csrf);
-  
   ReactDOM.render(
     <LoginWindow csrf={csrf} />, //UI element to be created
-    document.querySelector('#content'), //Render target
+    document.querySelector('#loginContent'), //Render target
   );
   
   //This is dumb, since it's just adding event listeners if the user spams back and forth
@@ -89,11 +81,9 @@ const createLoginWindow = (csrf) => {
 
 //Signup rendering
 const createSignupWindow = (csrf) => {
-    console.dir(csrf);
-  
   ReactDOM.render(
     <SignupWindow csrf={csrf} />, //UI element to be created
-    document.querySelector('#content'), //Render target
+    document.querySelector('#loginContent'), //Render target
   );
   
   //This is dumb, since it's just adding event listeners if the user spams back and forth
@@ -109,21 +99,6 @@ const createSignupWindow = (csrf) => {
 
 //Button events
 const setup = (csrf) => {
-  const loginButton = document.querySelector('#loginButton');
-  const signupButton = document.querySelector('#signupButton');
-    
-  signupButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    createSignupWindow(csrf);
-    return false;
-  });
-    
-  loginButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    createLoginWindow(csrf);
-    return false;
-  });
-    
   createLoginWindow(csrf); //Render the login window by default
 };
 
