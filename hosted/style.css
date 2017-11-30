@@ -9,12 +9,12 @@ html, body {
   width: 100%;
 }
 /**/
-#content {
+/*#content {
   background-color: #8B0000;
   display: flex;
   height: 300px;
   margin-top: 15%;
-}
+}*/
 /**/
 #loginContent {
   background-color: #8B0000;
@@ -30,20 +30,20 @@ html, body {
   padding-top: 5px;
   width: 40px;
 }*/
-
+/**/
 nav {
   background-color: #8B0000;
   border-bottom: solid;
-  border-bottom-style: groove; /*Groovy*/
-  border-bottom-color: #BB0000;
+  border-bottom-color: white;
   border-bottom-width: 1px;
   height: 50px;
+  margin-top: -2px;
   width: 100%;
 }
-
-nav:nth-child(1) {
+/**/
+/*nav:nth-child(1) {
   padding-left: 25px;
-}
+}*/
 /**/
 .navlink {
   color: white;
@@ -75,8 +75,8 @@ nav:nth-child(1) {
   border-color: white;
   border-width: 2px;
   height: 35px;
-  margin-top:0px;
-  padding-top:10px;
+  margin-top: 0px;
+  padding-top: 10px;
   width: 700px;
 }
 
@@ -195,6 +195,58 @@ nav:nth-child(1) {
   margin-top: 5px;
   font-style: italic;
   text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red;
+}
+/**/
+#settingsSidebar {
+  background-color: #BB0000;
+  border-right: solid;
+  border-right-color: white;
+  border-right-width: 2px;
+  box-sizing: border-box; /*Border inside element*/
+  /*display: flex;*/
+  float: left;
+  height: 95%;
+  width: 11%;
+}
+/**/
+settingsNav {
+  background-color: #8B0000;
+  margin: auto;
+  width: 100%;
+}
+/**/
+.settingsNavlink {
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+}
+/**/
+.settingsNavlink button, .settingsNavlink button:link, .settingsNavlink button:visited, .settingsNavlink button:hover, .settingsNavlink button:active {
+  background-color: #8B0000;
+  border-left: solid;
+  border-left-color: #BB0000;
+  border-left-width: 4px;
+  color: white;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  padding: 5px;
+  text-decoration: none;
+}
+/**/
+.settingsNavlink button:hover {
+  border-left: solid;
+  border-left-color: white;
+  border-left-width: 4px;
+  transition: border-left-color .65s ease-in-out;
+}
+/**/
+#settingsMain {
+  background-color: #323232;
+  display: flex;
+  float: right;
+  height: 95%;
+  vertical-align: middle;
+  width: 89%;
 }
 
 /*#domoMessage {

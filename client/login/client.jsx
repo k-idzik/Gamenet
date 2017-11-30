@@ -70,7 +70,7 @@ const createLoginWindow = (csrf) => {
   
   //This is dumb, since it's just adding event listeners if the user spams back and forth
   //But it's the quickest way, and fixes csrf garbage
-  document.querySelector('.formChange').addEventListener('mousedown', (e) => {
+  document.querySelector('.formChange').addEventListener('mouseup', (e) => {
     e.preventDefault();
     createSignupWindow(csrf);
     return false;
@@ -88,7 +88,7 @@ const createSignupWindow = (csrf) => {
   
   //This is dumb, since it's just adding event listeners if the user spams back and forth
   //But it's the quickest way, and fixes csrf garbage
-  document.querySelector('.formChange').addEventListener('mousedown', (e) => {
+  document.querySelector('.formChange').addEventListener('mouseup', (e) => {
     e.preventDefault();
     createLoginWindow(csrf);
     return false;

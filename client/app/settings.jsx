@@ -15,11 +15,26 @@ const handleDomo = (e) => {
   return false;
 };
 
+////Sidebar UI
+//const SettingsSidebar = (props) => {
+//  return(
+//    <form id='loginForm' name='loginForm' onSubmit={handleDomo} action='/login' method='POST' className='loginForm'>
+//      <h1 className='title'>The League of Gamers</h1>
+//      <input id='user' type='text' name='username' placeholder='Username' />
+//      <input id='pass' type='password' name='pass' placeholder='Password' />
+//      <input type='hidden' name='_csrf' value={props.csrf} />
+//      <input className='formSubmit' type='submit' value='Sign in' />
+//      <input className='formChange' type='button' value='Sign up' />
+//      <h3 id='errorMessage'></h3>
+//    </form>
+//  );
+//};
+
 //Username change UI
 const SettingsUsername = (props) => {
   return(
     <form id='loginForm' name='loginForm' onSubmit={handleDomo} action='/login' method='POST' className='loginForm'>
-      <h1 className='title'>The League of Gamers</h1>
+      <h1 className='title'>Username</h1>
       <input id='user' type='text' name='username' placeholder='Username' />
       <input id='pass' type='password' name='pass' placeholder='Password' />
       <input type='hidden' name='_csrf' value={props.csrf} />
@@ -34,7 +49,7 @@ const SettingsUsername = (props) => {
 const SettingsPassword = (props) => {
   return(
     <form id='loginForm' name='loginForm' onSubmit={handleDomo} action='/login' method='POST' className='loginForm'>
-      <h1 className='title'>The League of Gamers</h1>
+      <h1 className='title'>Password</h1>
       <input id='user' type='text' name='username' placeholder='Username' />
       <input id='pass' type='password' name='pass' placeholder='Password' />
       <input type='hidden' name='_csrf' value={props.csrf} />
@@ -46,16 +61,24 @@ const SettingsPassword = (props) => {
 };
 
 const setup = function(csrf) {
-  //Render the MakeDomo UI
+  //Sidebar linking
+  document.querySelector('#setting0').addEventListener('mouseup', (e) => {
+    ReactDOM.render(
+      <SettingsUsername csrf={csrf} />, //UI element to be created
+      document.querySelector('#settingsMain'), //Render target
+    );
+  });
+  document.querySelector('#setting1').addEventListener('mouseup', (e) => {
+    ReactDOM.render(
+      <SettingsPassword csrf={csrf} />, //UI element to be created
+      document.querySelector('#settingsMain'), //Render target
+    );
+  });
+  
+  //Render the username UI by default
   ReactDOM.render(
     <SettingsUsername csrf={csrf} />,
-    document.querySelector('#content')
-  );
-  
-  //Render the DomoList UI
-  ReactDOM.render(
-    <SettingsPassword csrf={csrf} />,
-    document.querySelector('#content')
+    document.querySelector('#settingsMain')
   );
 };
 
