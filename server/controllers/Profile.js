@@ -28,34 +28,56 @@ const getProfile = (request, response) => {
   });
 };
 
-const makeProfile = (req, res) => {
-  if (!req.body.name || !req.body.age) {
-    return res.status(400).json({ error: 'Both name and age are required!' });
-  }
+// Update the user's profile
+const updateProfile = (request, response) => {
+  const req = request;
+  const res = response;
 
-  const profileData = {
-    name: req.body.name,
-    age: req.body.age,
-    owner: req.session.account._id,
-  };
+  let profileData = {};
 
-  const newProfile = new Profile.ProfileModel(profileData);
+  Profile.ProfileModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred!' });
+    }
+    // console.dir(docs);
+    profileData = docs;
 
-  const profilePromise = newProfile.save();
-
-  profilePromise.then(() => res.json({ redirect: '/profile' }));
-
-  profilePromise.catch((err) => {
-    console.log(err);
-
-    if (err.code === 11000) {
-      return res.status(400).json({ error: 'Domo already exists!' });
+    if (req.body.name !== undefined) {
+      // console.log("name");
+      profileData.name = req.body.name;
+    }
+    if (req.body.age !== undefined) {
+      // console.log("age");
+      profileData.age = req.body.age;
+    }
+    if (req.body.fColor !== undefined) {
+      // console.log("fColor");
+      profileData.color = req.body.fColor;
     }
 
-    return res.status(400).json({ error: 'An error occurred!' });
-  });
+    // console.log(profileData.owner);
+    let userProfile = null;
+    let profilePromise = null;
+    // Check if this is a new profile
+    if (profileData.owner === undefined) {
+      profileData.owner = req.session.account._id;
+      userProfile = new Profile.ProfileModel(profileData);
+      profilePromise = userProfile.save();
+    } else {
+      profileData.owner = req.session.account._id;
+      // userProfile = Profile.ProfileModel(profileData);
+      profilePromise = profileData.save();
+    }
 
-  return profilePromise;
+    // Promise
+    // Send back an empty object to avoid stupidity
+    profilePromise.then(() => res.status(204).json({ }));
+
+    profilePromise.catch(() => res.status(400).json({ error: 'An error occurred' }));
+
+    return profilePromise;
+  });
 };
 
 const palsPage = (req, res) => {
@@ -65,5 +87,5 @@ const palsPage = (req, res) => {
 
 module.exports.profilePage = makerPage;
 module.exports.getProfile = getProfile;
-module.exports.profile = makeProfile;
+module.exports.updateProfile = updateProfile;
 module.exports.palsPage = palsPage;

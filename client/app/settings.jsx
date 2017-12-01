@@ -46,6 +46,18 @@ const changePassword = (e) => {
   return false;
 };
 
+//Profile update checks
+const updateProfile = (e) => {
+  e.preventDefault();
+
+  //Go to controller to update password
+  sendAjax('POST', $('#updateProfileForm').attr('action'), $('#updateProfileForm').serialize(), function() {
+    document.querySelector('#errorMessage').textContent = 'Profile updated!';
+  });
+
+  return false;
+};
+
 //Username change UI
 const SettingsUsername = (props) => {
   return(
@@ -76,10 +88,34 @@ const SettingsPassword = (props) => {
   );
 };
 
+//Profile update UI
+const SettingsProfile = (props) => {
+  return(
+    <form id='updateProfileForm' name='updateProfileForm' onSubmit={updateProfile} action='/updateProfile' method='POST' className='profileForm'>
+      <label htmlFor='name'>Name:</label>
+      <input id='name' type='text' name='name' placeholder='Enter name' />
+      
+      <label htmlFor='age'>Age:</label>
+      <input id='age' type='number' name='age' placeholder='Enter age' />
+      
+      <label htmlFor='fColor'>Favorite Color:</label>
+      <input id='fColor' type='text' name='fColor' placeholder='Enter favorite color' />
+      
+      <div id='settingsTriBelow'>
+        <input type='hidden' name='_csrf' value={props.csrf} />
+        <input className='formSubmit' type='submit' value='Update profile' />
+        <h3 id='errorMessage'></h3>
+      </div>
+    </form>
+  );
+};
+
+
 const setup = function(csrf) {
   const main = document.querySelector('#settingsMain');
   const setting0 = document.querySelector('#setting0');
   const setting1 = document.querySelector('#setting1');
+  const setting2 = document.querySelector('#setting2');
   
   setting0.style.borderLeftColor = 'white'; //Default selected
   
@@ -93,6 +129,7 @@ const setup = function(csrf) {
     //Update selected
     setting0.style.borderLeftColor = 'white';
     setting1.style.borderLeftColor = '#BB0000';
+    setting2.style.borderLeftColor = '#BB0000';
   });
   setting1.addEventListener('mouseup', (e) => {
     ReactDOM.render(
@@ -103,6 +140,18 @@ const setup = function(csrf) {
     //Update selected
     setting0.style.borderLeftColor = '#BB0000';
     setting1.style.borderLeftColor = 'white';
+    setting2.style.borderLeftColor = '#BB0000';
+  });
+  setting2.addEventListener('mouseup', (e) => {
+    ReactDOM.render(
+      <SettingsProfile csrf={csrf} />, //UI element to be created
+      main, //Render target
+    );
+    
+    //Update selected
+    setting0.style.borderLeftColor = '#BB0000';
+    setting1.style.borderLeftColor = '#BB0000';
+    setting2.style.borderLeftColor = 'white';
   });
   
   //Render the username UI by default

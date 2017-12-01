@@ -30,7 +30,6 @@ nav {
   float: right;
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
-  /*padding: 5px;*/
   margin-right: 10px;
   padding-top: 15px;
 }
@@ -58,6 +57,14 @@ nav {
   text-align: center;
 }
 
+.profileForm {
+  height: 300px;
+  margin: auto;
+  padding-top: 20px;
+  text-align: center;
+  width: 450px;
+}
+
 .title {
   color: white;
   font-family: 'Play', sans-serif;
@@ -76,6 +83,18 @@ nav {
 }
 
 #user:focus, #user1:focus, #user2:focus, #pass:focus, #pass1:focus, #pass2:focus {
+  box-shadow: 0px 0px 1px 2px #BB0000;
+  outline: none;
+}
+
+#name, #age, #fColor {
+  border-radius: 6px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+#name:focus, #age:focus, #fColor:focus {
   box-shadow: 0px 0px 1px 2px #BB0000;
   outline: none;
 }
@@ -185,12 +204,35 @@ settingsNav {
   width: 100%;
 }
 
+#settingsTriBelow {
+  background-color: #323232;
+  display: inline;
+  height: 95%;
+  margin: auto;
+  width: 100;
+}
+
 .settingsTitle {
   color: white;
   font-family: 'Play', sans-serif;
   font-size: 48px;
   margin-bottom: 15px;
   margin-top: 15%;
+}
+
+label {
+  color: white;
+  display: inline-block;
+  font-family: 'Play', sans-serif;
+  font-size: 20px;
+  margin-left: -50px;
+  margin-right: 10px;
+  text-align: right;
+  width: 200px;
+}
+
+.clear {
+  float: none;
 }
 
 #profilePhoto {

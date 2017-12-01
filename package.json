@@ -12,7 +12,7 @@
     "buildMainBundle": "babel ./client/app/profile.jsx ./client/helper --presets react --out-file ./hosted/mainBundle.js",
     "buildPalsBundle": "babel ./client/app/pals.jsx ./client/helper --presets react --out-file ./hosted/palsBundle.js",
     "buildSettingsBundle": "babel ./client/app/settings.jsx ./client/helper --presets react --out-file ./hosted/settingsBundle.js",
-    "build": "npm run buildLoginBundle && npm run buildMainBundle && npm run buildSettingsBundle",
+    "build": "npm run buildLoginBundle && npm run buildMainBundle && npm run buildPalsBundle && npm run buildSettingsBundle",
     "watchLoginBundle": "babel --watch ./client/login ./client/helper --presets react --out-file ./hosted/loginBundle.js",
     "watchMainBundle": "babel --watch ./client/app/profile.jsx ./client/helper --presets react --out-file ./hosted/mainBundle.js",
     "watchPalsBundle": "babel --watch ./client/app/pals.jsx ./client/helper --presets react --out-file ./hosted/palsBundle.js",

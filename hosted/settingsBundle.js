@@ -48,6 +48,18 @@ var changePassword = function changePassword(e) {
   return false;
 };
 
+//Profile update checks
+var updateProfile = function updateProfile(e) {
+  e.preventDefault();
+
+  //Go to controller to update password
+  sendAjax('POST', $('#updateProfileForm').attr('action'), $('#updateProfileForm').serialize(), function () {
+    document.querySelector('#errorMessage').textContent = 'Profile updated!';
+  });
+
+  return false;
+};
+
 //Username change UI
 var SettingsUsername = function SettingsUsername(props) {
   return React.createElement(
@@ -86,10 +98,44 @@ var SettingsPassword = function SettingsPassword(props) {
   );
 };
 
+//Profile update UI
+var SettingsProfile = function SettingsProfile(props) {
+  return React.createElement(
+    'form',
+    { id: 'updateProfileForm', name: 'updateProfileForm', onSubmit: updateProfile, action: '/updateProfile', method: 'POST', className: 'profileForm' },
+    React.createElement(
+      'label',
+      { htmlFor: 'name' },
+      'Name:'
+    ),
+    React.createElement('input', { id: 'name', type: 'text', name: 'name', placeholder: 'Enter name' }),
+    React.createElement(
+      'label',
+      { htmlFor: 'age' },
+      'Age:'
+    ),
+    React.createElement('input', { id: 'age', type: 'number', name: 'age', placeholder: 'Enter age' }),
+    React.createElement(
+      'label',
+      { htmlFor: 'fColor' },
+      'Favorite Color:'
+    ),
+    React.createElement('input', { id: 'fColor', type: 'text', name: 'fColor', placeholder: 'Enter favorite color' }),
+    React.createElement(
+      'div',
+      { id: 'settingsTriBelow' },
+      React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
+      React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Update profile' }),
+      React.createElement('h3', { id: 'errorMessage' })
+    )
+  );
+};
+
 var setup = function setup(csrf) {
   var main = document.querySelector('#settingsMain');
   var setting0 = document.querySelector('#setting0');
   var setting1 = document.querySelector('#setting1');
+  var setting2 = document.querySelector('#setting2');
 
   setting0.style.borderLeftColor = 'white'; //Default selected
 
@@ -102,6 +148,7 @@ var setup = function setup(csrf) {
     //Update selected
     setting0.style.borderLeftColor = 'white';
     setting1.style.borderLeftColor = '#BB0000';
+    setting2.style.borderLeftColor = '#BB0000';
   });
   setting1.addEventListener('mouseup', function (e) {
     ReactDOM.render(React.createElement(SettingsPassword, { csrf: csrf }), //UI element to be created
@@ -111,6 +158,17 @@ var setup = function setup(csrf) {
     //Update selected
     setting0.style.borderLeftColor = '#BB0000';
     setting1.style.borderLeftColor = 'white';
+    setting2.style.borderLeftColor = '#BB0000';
+  });
+  setting2.addEventListener('mouseup', function (e) {
+    ReactDOM.render(React.createElement(SettingsProfile, { csrf: csrf }), //UI element to be created
+    main //Render target
+    );
+
+    //Update selected
+    setting0.style.borderLeftColor = '#BB0000';
+    setting1.style.borderLeftColor = '#BB0000';
+    setting2.style.borderLeftColor = 'white';
   });
 
   //Render the username UI by default

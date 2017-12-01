@@ -15,36 +15,33 @@
 //  return false;
 //};
 //
-////Domo UI
-//const DomoForm = (props) => {
-//  return(
-//    <form id='domoForm' name='domoForm' onSubmit={handleDomo} action='/profile' method='POST' className='domoForm'>
-//      <label htmlFor='name'>Name: </label>
-//      <input id='domoName' type='text' name='name' placeholder='Domo Name' />
-//      <label htmlFor='age'>Age: </label>
-//      <input id='domoAge' type='text' name='age' placeholder='Domo Age' />
-//      <input type='hidden' name='_csrf' value={props.csrf} />
-//      <input className='makeDomoSubmit' type='submit' value='Make Domo' />
-//    </form>
-//  );
+////BasicInfo UI
+//const BasicInfo = () => {
+//  sendAjax('GET', '/getProfile', null, (data) => {
+//    ReactDOM.render(
+//      <BasicInfo domos={data.domos} />,
+//      document.querySelector('#domos')
+//    );
 //};
 //
-////Determine what Domos to draw
-//const DomoList = function(props) {
-//  //No Domos
+////Games UI
+//const Games = () => {
+//  //No games
+//  console.dir(props.profile);
 //  if (props.profile.length === 0) {
 //    return(
-//      <div className='domoList'>
-//        <h3 className='emptyDomo'>No Domos yet</h3>
+//      <div className='gamesList'>
+//        <h3 className='emptyGames'>No Domos yet</h3>
 //      </div>
 //    );
 //  }
 //  
 //  //Create UI for each Domo
+//  //<img src='/assets/img/domoface.jpeg' alt='domo face' className='domoFace' /> //Might do images later
 //  const domoNodes = props.profile.map(function(domo) {
 //    return(
 //      <div key={domo._id} className='domo'>
-//        <img src='/assets/img/domoface.jpeg' alt='domo face' className='domoFace' />
+//        
 //        <h3 className='domoName'>Name: {domo.name}</h3>
 //        <h3 className='domoAge'>Age: {domo.age}</h3>
 //      </div>
@@ -69,27 +66,18 @@
 //  });
 //};
 //
-//const setup = function(csrf) {
-//  //Render the MakeDomo UI
-//  ReactDOM.render(
-//    <DomoForm csrf={csrf} />,
-//    document.querySelector('#makeDomo')
-//  );
-//  
-//  //Render the DomoList UI
-//  ReactDOM.render(
-//    <DomoList domos={[]} />,
-//    document.querySelector('#domos')
-//  );
-//  
-//  //Load any Domos
-//  loadDomosFromServer();
-//};
+const setup = function(csrf) {
+  //Render the BasicInfo UI
+  //BasicInfo();
+  
+  //Render the Games UI
+  //Games();
+};
 
 //Get the csrf token from the server
 const getToken = () => {
   sendAjax('GET', '/getToken', null, (result) => {
-//      setup(result.csrfToken);
+    setup(result.csrfToken);
   });
 };
 

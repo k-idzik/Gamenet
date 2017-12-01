@@ -12,7 +12,7 @@ const setName = (name) => _.escape(name).trim();
 const ProfileSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     set: setName,
   },
@@ -20,7 +20,13 @@ const ProfileSchema = new mongoose.Schema({
   age: {
     type: Number,
     min: 0,
-    required: true,
+    required: false,
+  },
+
+  color: {
+    type: String,
+    required: false,
+    trim: true,
   },
 
   owner: {
@@ -38,6 +44,8 @@ const ProfileSchema = new mongoose.Schema({
 ProfileSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,
+  color: doc.color,
+  owner: doc.owner,
 });
 
 ProfileSchema.statics.findByOwner = (ownerId, callback) => {
@@ -45,8 +53,11 @@ ProfileSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return ProfileModel.find(search).select('name age').exec(callback);
+  return ProfileModel.find(search).select('name age color owner').exec(callback);
 };
+
+
+// ProfileSchema.statics.getName = () => name;
 
 ProfileModel = mongoose.model('Profile', ProfileSchema);
 
