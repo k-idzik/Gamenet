@@ -1,6 +1,8 @@
+//Login checks
 const handleLogin = (e) => {
   e.preventDefault();
-    
+  
+  //Check that username and password have been entered
   if ($('#user').val() == '' || $('#pass').val() == '') {
     handleError('Enter a username and password!');
     return false;
@@ -11,14 +13,17 @@ const handleLogin = (e) => {
   return false;
 };
 
+//Signup checks
 const handleSignup = (e) => {
   e.preventDefault();
-    
+  
+  //Check that all info has been entered
   if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
     handleError('All fields are required to sign up!');
     return false;
   }
-    
+  
+  //Check that passwords match
   if ($('#pass').val() !== $('#pass2').val()) {
     handleError('Passwords do not match!');
     return false;

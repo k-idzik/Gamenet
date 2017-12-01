@@ -130,7 +130,7 @@ nav {
   margin-bottom: 15px;
 }
 /**/
-#user, #pass, #pass2 {
+#user, #user1, #user2, #pass, #pass1, #pass2 {
   border-radius: 6px;
   display: block;
   font-family: 'Raleway', sans-serif;
@@ -138,10 +138,9 @@ nav {
   margin: auto;
   margin-top: 10px;
   text-align: center;
-  width: 180px;
 }
 /**/
-#user:focus, #pass:focus, #pass2:focus {
+#user:focus, #user1:focus, #user2:focus, #pass:focus, #pass1:focus, #pass2:focus {
   box-shadow: 0px 0px 1px 2px #BB0000;
   outline: none;
 }
@@ -156,11 +155,10 @@ nav {
   font-size: 24px;
   margin-left: 15px;
   margin-top: 10px;
-  padding: 3px 0px;
+  padding: 3px 5px;
   text-align: center;
   text-decoration: none;
   transition: background-color 0.4s ease;
-  width: 100px;
 }
 /**/
 .formSubmit {
@@ -172,11 +170,14 @@ nav {
   font-family: 'Raleway', sans-serif;
   font-size: 24px;
   margin-top: 10px;
-  padding: 3px 0px;
+  padding: 3px 5px;
   text-align: center;
   text-decoration: none;
   transition: background-color 0.4s ease;
-  width: 100px;
+}
+/**/
+.formChange:focus, .formSubmit:focus,  {
+  outline: 0; /*Prevents blue outlines on buttons*/
 }
 /**/
 .formChange:active, .formChange:hover, .formChange:link, .formChange:visited, .formSubmit:active, .formSubmit:hover, .formSubmit:link, .formSubmit:visited, {
@@ -215,18 +216,15 @@ settingsNav {
   width: 100%;
 }
 /**/
-.settingsNavlink {
-  color: white;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-}
-/**/
 .settingsNavlink button, .settingsNavlink button:link, .settingsNavlink button:visited, .settingsNavlink button:hover, .settingsNavlink button:active {
-  background-color: #8B0000;
+  background-color: #BB0000;
+  border: none;
   border-left: solid;
   border-left-color: #BB0000;
   border-left-width: 4px;
   color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
   margin-bottom: 0px;
   margin-top: 5px;
   padding: 5px;
@@ -240,6 +238,10 @@ settingsNav {
   transition: border-left-color .65s ease-in-out;
 }
 /**/
+.settingsNavlink button:focus {
+  outline: 0;
+}
+/**/
 #settingsMain {
   background-color: #323232;
   display: flex;
@@ -248,7 +250,13 @@ settingsNav {
   vertical-align: middle;
   width: 89%;
 }
-
+/**/
+.settingsTitle {
+  color: white;
+  font-family: 'Play', sans-serif;
+  font-size: 48px;
+  margin-bottom: 15px;
+}
 /*#domoMessage {
   display:none;
   height: 650px;

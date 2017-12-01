@@ -40,6 +40,7 @@ AccountSchema.statics.toAPI = doc => ({
 const validatePassword = (doc, password, callback) => {
   const pass = doc.password;
 
+  // Encryption
   return crypto.pbkdf2(password, doc.salt, iterations, keyLength, 'RSA-SHA512', (err, hash) => {
     if (hash.toString('hex') !== pass) {
       return callback(false);
@@ -59,6 +60,7 @@ AccountSchema.statics.findByUsername = (name, callback) => {
 AccountSchema.statics.generateHash = (password, callback) => {
   const salt = crypto.randomBytes(saltLength);
 
+  // Encryption
   crypto.pbkdf2(password, salt, iterations, keyLength, 'RSA-SHA512', (err, hash) =>
     callback(salt, hash.toString('hex'))
   );

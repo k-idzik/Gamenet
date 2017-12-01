@@ -1,52 +1,68 @@
 'use strict';
 
-var handleDomo = function handleDomo(e) {
+//Username change checks
+var changeUsername = function changeUsername(e) {
   e.preventDefault();
 
-  //$('#domoMessage').animate({width: 'hide'}, 350);
-
-  if ($('#domoName').val() == '' || $('#domoAge').val() == '') {
-    handleError('RAWR! All fields are required');
+  //Check that all fields are filled out
+  if ($('#user1').val() == '' || $('#user2').val() == '' || $('#pass').val() == '') {
+    handleError('All fields are required!');
     return false;
   }
 
-  sendAjax('POST', $('#domoForm').attr('action'), $('#domoForm').serialize(), function () {
-    loadDomosFromServer();
+  //Check that new usernames match
+  if ($('#user1').val() !== $('#user2').val()) {
+    handleError('Usernames do not match!');
+    return false;
+  }
+
+  //Go to controller to update username
+  sendAjax('POST', $('#changeUsernameForm').attr('action'), $('#changeUsernameForm').serialize(), function () {
+    document.querySelector('#errorMessage').textContent = 'Username updated!';
   });
 
   return false;
 };
 
-////Sidebar UI
-//const SettingsSidebar = (props) => {
-//  return(
-//    <form id='loginForm' name='loginForm' onSubmit={handleDomo} action='/login' method='POST' className='loginForm'>
-//      <h1 className='title'>The League of Gamers</h1>
-//      <input id='user' type='text' name='username' placeholder='Username' />
-//      <input id='pass' type='password' name='pass' placeholder='Password' />
-//      <input type='hidden' name='_csrf' value={props.csrf} />
-//      <input className='formSubmit' type='submit' value='Sign in' />
-//      <input className='formChange' type='button' value='Sign up' />
-//      <h3 id='errorMessage'></h3>
-//    </form>
-//  );
-//};
+//Password change checks
+var changePassword = function changePassword(e) {
+  e.preventDefault();
+
+  //Check that all fields are filled out
+  if ($('#pass').val() == '' || $('#pass1').val() == '' || $('#pass2').val() == '') {
+    handleError('All fields are required!');
+    return false;
+  }
+
+  //Check that new passwords match
+  if ($('#pass1').val() !== $('#pass2').val()) {
+    handleError('New passwords do not match!');
+    return false;
+  }
+
+  //Go to controller to update password
+  sendAjax('POST', $('#changePasswordForm').attr('action'), $('#changePasswordForm').serialize(), function () {
+    document.querySelector('#errorMessage').textContent = 'Password updated!';
+  });
+
+  return false;
+};
 
 //Username change UI
 var SettingsUsername = function SettingsUsername(props) {
   return React.createElement(
     'form',
-    { id: 'loginForm', name: 'loginForm', onSubmit: handleDomo, action: '/login', method: 'POST', className: 'loginForm' },
+    { id: 'changeUsernameForm', name: 'changeUsernameForm', onSubmit: changeUsername, action: '/updateUsername', method: 'POST', className: 'loginForm' },
     React.createElement(
       'h1',
-      { className: 'title' },
-      'Username'
+      { className: 'settingsTitle' },
+      'Change username'
     ),
-    React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'Username' }),
+    React.createElement('input', { id: 'user1', type: 'text', name: 'username1', placeholder: 'New username' }),
+    React.createElement('input', { id: 'user2', type: 'text', name: 'username2', placeholder: 'Retype new username' }),
     React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'Password' }),
     React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
-    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign in' }),
-    React.createElement('input', { className: 'formChange', type: 'button', value: 'Sign up' }),
+    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Change username' }),
     React.createElement('h3', { id: 'errorMessage' })
   );
 };
@@ -55,36 +71,50 @@ var SettingsUsername = function SettingsUsername(props) {
 var SettingsPassword = function SettingsPassword(props) {
   return React.createElement(
     'form',
-    { id: 'loginForm', name: 'loginForm', onSubmit: handleDomo, action: '/login', method: 'POST', className: 'loginForm' },
+    { id: 'changePasswordForm', name: 'changePasswordForm', onSubmit: changePassword, action: '/updatePassword', method: 'POST', className: 'loginForm' },
     React.createElement(
       'h1',
-      { className: 'title' },
-      'Password'
+      { className: 'settingsTitle' },
+      'Change password'
     ),
-    React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'Username' }),
-    React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'Password' }),
+    React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'Old password' }),
+    React.createElement('input', { id: 'pass1', type: 'password', name: 'pass1', placeholder: 'New password' }),
+    React.createElement('input', { id: 'pass2', type: 'password', name: 'pass2', placeholder: 'Retype new password' }),
     React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf }),
-    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Sign in' }),
-    React.createElement('input', { className: 'formChange', type: 'button', value: 'Sign up' }),
+    React.createElement('input', { className: 'formSubmit', type: 'submit', value: 'Change password' }),
     React.createElement('h3', { id: 'errorMessage' })
   );
 };
 
 var setup = function setup(csrf) {
+  var main = document.querySelector('#settingsMain');
+  var setting0 = document.querySelector('#setting0');
+  var setting1 = document.querySelector('#setting1');
+
+  setting0.style.borderLeftColor = 'white'; //Default selected
+
   //Sidebar linking
-  document.querySelector('#setting0').addEventListener('mouseup', function (e) {
+  setting0.addEventListener('mouseup', function (e) {
     ReactDOM.render(React.createElement(SettingsUsername, { csrf: csrf }), //UI element to be created
-    document.querySelector('#settingsMain') //Render target
+    main //Render target
     );
+
+    //Update selected
+    setting0.style.borderLeftColor = 'white';
+    setting1.style.borderLeftColor = '#BB0000';
   });
-  document.querySelector('#setting1').addEventListener('mouseup', function (e) {
+  setting1.addEventListener('mouseup', function (e) {
     ReactDOM.render(React.createElement(SettingsPassword, { csrf: csrf }), //UI element to be created
-    document.querySelector('#settingsMain') //Render target
+    main //Render target
     );
+
+    //Update selected
+    setting0.style.borderLeftColor = '#BB0000';
+    setting1.style.borderLeftColor = 'white';
   });
 
   //Render the username UI by default
-  ReactDOM.render(React.createElement(SettingsUsername, { csrf: csrf }), document.querySelector('#settingsMain'));
+  ReactDOM.render(React.createElement(SettingsUsername, { csrf: csrf }), main);
 };
 
 //Get the csrf token from the server
