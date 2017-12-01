@@ -1,4 +1,3 @@
-/**/
 html, body {
   background-color: #323232;
   color: white;
@@ -8,14 +7,7 @@ html, body {
   padding: 0;
   width: 100%;
 }
-/**/
-/*#content {
-  background-color: #8B0000;
-  display: flex;
-  height: 300px;
-  margin-top: 15%;
-}*/
-/**/
+
 #loginContent {
   background-color: #8B0000;
   display: flex;
@@ -23,28 +15,16 @@ html, body {
   margin-top: 15%;
 }
 
-/*#logo {
-  border-radius: 8px;
-  float:left;
-  height: 40px;
-  padding-top: 5px;
-  width: 40px;
-}*/
-/**/
 nav {
   background-color: #8B0000;
   border-bottom: solid;
   border-bottom-color: white;
   border-bottom-width: 1px;
   height: 50px;
-  margin-top: -2px;
+  position: absolute;
   width: 100%;
 }
-/**/
-/*nav:nth-child(1) {
-  padding-left: 25px;
-}*/
-/**/
+
 .navlink {
   color: white;
   float: right;
@@ -54,14 +34,14 @@ nav {
   margin-right: 10px;
   padding-top: 15px;
 }
-/**/
+
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
   border-bottom-color: #8B0000;
   color: white;
   padding: 5px;
   text-decoration: none;
 }
-/**/
+
 .navlink a:hover {
   border-bottom: solid;
   border-bottom-color: white;
@@ -70,6 +50,188 @@ nav {
   transition: border-bottom-color .65s ease-in-out;
 }
 
+.loginForm {
+  display: block;
+  font-size: 20px;
+  height: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: white;
+  font-family: 'Play', sans-serif;
+  font-size: 72px;
+  margin-bottom: 15px;
+}
+
+#user, #user1, #user2, #pass, #pass1, #pass2 {
+  border-radius: 6px;
+  display: block;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#user:focus, #user1:focus, #user2:focus, #pass:focus, #pass1:focus, #pass2:focus {
+  box-shadow: 0px 0px 1px 2px #BB0000;
+  outline: none;
+}
+
+.formChange {
+  background-color: #8B0000;
+  border-color: white;
+  border-radius: 2px;
+  border-width: 1px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 24px;
+  margin-left: 15px;
+  margin-top: 10px;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.4s ease;
+}
+
+.formSubmit {
+  background-color: #8B0000;
+  border-color: white;
+  border-radius: 2px;
+  border-width: 1px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 24px;
+  margin-top: 10px;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.4s ease;
+}
+
+.formChange:focus, .formSubmit:focus,  {
+  outline: 0; /*Prevents blue outlines on buttons*/
+}
+
+.formChange:active, .formChange:hover, .formChange:link, .formChange:visited, .formSubmit:active, .formSubmit:hover, .formSubmit:link, .formSubmit:visited, {
+  color: white;
+}
+
+.formChange:hover, .formSubmit:hover {
+  background-color: #BB0000;
+  transition: background-color 0.4s ease;
+}
+
+#errorMessage {
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  margin-top: 5px;
+  font-style: italic;
+  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red;
+}
+
+#settingsSidebar {
+  background-color: #BB0000;
+  border-right: solid;
+  border-right-color: white;
+  border-right-width: 2px;
+  box-sizing: border-box; /*Border inside element*/
+  float: left;
+  height: 100%;
+  padding-top: 50px;
+  width: 160px;
+}
+
+settingsNav {
+  background-color: #8B0000;
+  margin: auto;
+  width: 100%;
+}
+
+.settingsNavlink button, .settingsNavlink button:link, .settingsNavlink button:visited, .settingsNavlink button:hover, .settingsNavlink button:active {
+  background-color: #BB0000;
+  border: none;
+  border-left: solid;
+  border-left-color: #BB0000;
+  border-left-width: 4px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.settingsNavlink button:hover {
+  border-left: solid;
+  border-left-color: white;
+  border-left-width: 4px;
+  transition: border-left-color .65s ease-in-out;
+}
+
+.settingsNavlink button:focus {
+  outline: 0;
+}
+
+#settingsMain {
+  background-color: #323232;
+  height: 95%;
+  margin-left: 160px;
+  padding-top: 40px;
+  width: 100%;
+}
+
+.settingsTitle {
+  color: white;
+  font-family: 'Play', sans-serif;
+  font-size: 48px;
+  margin-bottom: 15px;
+  margin-top: 15%;
+}
+
+#profilePhoto {
+  background-color: #BB0000;
+  float: left;
+  height: 256px;
+  padding-top: 50px;
+  width: 256px;
+}
+
+#profilePhoto img {
+  display: block;
+  margin: auto;
+  padding-top: 1%;
+}
+
+#basicInfo {
+  background-color: #323232;
+  height: 256px;
+  margin-left: 256px;
+  padding-top: 50px;
+  width: 100%;
+}
+
+#games {
+  background-color: #323232;
+  float: left;
+  height: 60%;
+  width: 100%;
+}
+
+#pals {
+  background-color: #323232;
+  float: left;
+  height: 100%;
+  margin-top: 50px;
+  position: fixed;
+  width: 100%;
+}
+
+/*
 .domoForm {
   background-color: #8B0000;
   border-color: white;
@@ -113,182 +275,9 @@ nav {
 .makeDomoSubmit:hover {
   background-color: #BB0000;
   transition: background-color 0.4s ease;
-}
-/**/
-.loginForm {
-  display: block;
-  font-size: 20px;
-  height: 300px;
-  margin: auto;
-  text-align: center;
-}
-/**/
-.title {
-  color: white;
-  font-family: 'Play', sans-serif;
-  font-size: 72px;
-  margin-bottom: 15px;
-}
-/**/
-#user, #user1, #user2, #pass, #pass1, #pass2 {
-  border-radius: 6px;
-  display: block;
-  font-family: 'Raleway', sans-serif;
-  font-size: 20px;
-  margin: auto;
-  margin-top: 10px;
-  text-align: center;
-}
-/**/
-#user:focus, #user1:focus, #user2:focus, #pass:focus, #pass1:focus, #pass2:focus {
-  box-shadow: 0px 0px 1px 2px #BB0000;
-  outline: none;
-}
-/**/
-.formChange {
-  background-color: #8B0000;
-  border-color: white;
-  border-radius: 2px;
-  border-width: 1px;
-  color: white;
-  font-family: 'Raleway', sans-serif;
-  font-size: 24px;
-  margin-left: 15px;
-  margin-top: 10px;
-  padding: 3px 5px;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.4s ease;
-}
-/**/
-.formSubmit {
-  background-color: #8B0000;
-  border-color: white;
-  border-radius: 2px;
-  border-width: 1px;
-  color: white;
-  font-family: 'Raleway', sans-serif;
-  font-size: 24px;
-  margin-top: 10px;
-  padding: 3px 5px;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.4s ease;
-}
-/**/
-.formChange:focus, .formSubmit:focus,  {
-  outline: 0; /*Prevents blue outlines on buttons*/
-}
-/**/
-.formChange:active, .formChange:hover, .formChange:link, .formChange:visited, .formSubmit:active, .formSubmit:hover, .formSubmit:link, .formSubmit:visited, {
-  color: white;
-}
-/**/
-.formChange:hover, .formSubmit:hover {
-  background-color: #BB0000;
-  transition: background-color 0.4s ease;
-}
-/**/
-#errorMessage {
-  color: white;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  margin-top: 5px;
-  font-style: italic;
-  text-shadow: 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red, 0px 0px 1px red;
-}
-/**/
-#settingsSidebar {
-  background-color: #BB0000;
-  border-right: solid;
-  border-right-color: white;
-  border-right-width: 2px;
-  box-sizing: border-box; /*Border inside element*/
-  /*display: flex;*/
-  float: left;
-  height: 95%;
-  width: 11%;
-}
-/**/
-settingsNav {
-  background-color: #8B0000;
-  margin: auto;
-  width: 100%;
-}
-/**/
-.settingsNavlink button, .settingsNavlink button:link, .settingsNavlink button:visited, .settingsNavlink button:hover, .settingsNavlink button:active {
-  background-color: #BB0000;
-  border: none;
-  border-left: solid;
-  border-left-color: #BB0000;
-  border-left-width: 4px;
-  color: white;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  margin-bottom: 0px;
-  margin-top: 5px;
-  padding: 5px;
-  text-decoration: none;
-}
-/**/
-.settingsNavlink button:hover {
-  border-left: solid;
-  border-left-color: white;
-  border-left-width: 4px;
-  transition: border-left-color .65s ease-in-out;
-}
-/**/
-.settingsNavlink button:focus {
-  outline: 0;
-}
-/**/
-#settingsMain {
-  background-color: #323232;
-  display: flex;
-  float: right;
-  height: 95%;
-  vertical-align: middle;
-  width: 89%;
-}
-/**/
-.settingsTitle {
-  color: white;
-  font-family: 'Play', sans-serif;
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-/*#domoMessage {
-  display:none;
-  height: 650px;
-  overflow: hidden;
-  position: absolute;
-  right: 0px;
-  top: 250px;
-  width: 250px;
-  z-index: 200;
-}
+}*/
 
-#domoMessage h3 {
-  left: 20px;
-  position: absolute;
-  top: 0px;
-  width: 200px;
-}
-
-#speech {
-  height: 120px;
-  width: 250px;
-  z-index:300;
-}
-
-#errorMessage {
-  color: red;
-  font-size: 1.2em;
-  font-style: italic;
-  font-weight: bold;
-}
-*/
-
+/*
 #domo {
   -ms-transform: rotate(330deg);
   -webkit-transform: rotate(330deg); 
@@ -298,17 +287,6 @@ settingsNav {
   transform: rotate(330deg);
   width: 300px;
   z-index: 225;
-}
-
-#domos {
-  width: 40%;
-  min-width: 400px;
-  border-color: #8B0000;
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 2px;
-  margin: 0 auto;
-  margin-top: 100px;
 }
 
 .domo {
@@ -372,4 +350,4 @@ h3.domoAge {
 
 .domo:last-child {
   margin-bottom:10px;
-}
+}*/

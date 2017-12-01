@@ -1,5 +1,3 @@
-'use strict';
-
 //const handleDomo = (e) => {
 //  e.preventDefault();
 //
@@ -89,38 +87,13 @@
 //};
 
 //Get the csrf token from the server
-var getToken = function getToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
-    //      setup(result.csrfToken);
+const getToken = () => {
+  sendAjax('GET', '/getToken', null, (result) => {
+//      setup(result.csrfToken);
   });
 };
 
 //Get the token when the page loads
-$(document).ready(function () {
-  getToken();
+$(document).ready(function() {
+    getToken();
 });
-'use strict';
-
-var handleError = function handleError(message) {
-  document.querySelector('#errorMessage').textContent = message;
-};
-
-var redirect = function redirect(response) {
-  window.location = response.redirect;
-};
-
-var sendAjax = function sendAjax(type, action, data, success) {
-  $.ajax({
-    cache: false,
-    type: type,
-    url: action,
-    data: data,
-    dataType: 'json',
-    success: success,
-    error: function error(xhr, status, _error) {
-      var messageObj = JSON.parse(xhr.responseText);
-
-      handleError(messageObj.error);
-    }
-  });
-};

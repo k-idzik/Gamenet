@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const _ = require('underscore');
 
-let DomoModel = {};
+let ProfileModel = {};
 
 // mongoose.Types.ObjectId is a function that
 // converts the string ID to a real Mongo ID
 const convertId = mongoose.Types.ObjectId;
 const setName = (name) => _.escape(name).trim();
 
-const DomoSchema = new mongoose.Schema({
+const ProfileSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -35,20 +35,20 @@ const DomoSchema = new mongoose.Schema({
   },
 });
 
-DomoSchema.statics.toAPI = (doc) => ({
+ProfileSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,
 });
 
-DomoSchema.statics.findByOwner = (ownerId, callback) => {
+ProfileSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     owner: convertId(ownerId),
   };
 
-  return DomoModel.find(search).select('name age').exec(callback);
+  return ProfileModel.find(search).select('name age').exec(callback);
 };
 
-DomoModel = mongoose.model('Domo', DomoSchema);
+ProfileModel = mongoose.model('Profile', ProfileSchema);
 
-module.exports.DomoModel = DomoModel;
-module.exports.DomoSchema = DomoSchema;
+module.exports.ProfileModel = ProfileModel;
+module.exports.ProfileSchema = ProfileSchema;

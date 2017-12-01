@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>The League of Gamers</title>
+  <title>Profile</title>
   <script crossorigin src="https://unpkg.com/react@15/dist/react.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
   <script crossorigin src="https://unpkg.com/prop-types/prop-types.min.js"></script>
@@ -18,11 +18,11 @@
     <!--These are purposely backwards, heckin' CSS-->
     <div class="navlink"><a href="/logout">Log out</a></div>
     <div class="navlink"><a href="/settings">Settings</a></div>
+    <div class="navlink"><a href="/pals">Pals</a></div>
   </nav>
-  <section id="makeDomo">
-  </section>
-  <section id="domos">
-  </section>
+  <div id="profilePhoto"><img src="/assets/img/profilePhoto.png" height="252" width="252"/></div>
+  <div id="basicInfo"></div>
+  <div id="games"></div>
   <script src="/assets/mainBundle.js"></script>
 </body>
 </html>

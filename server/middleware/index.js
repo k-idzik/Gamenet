@@ -13,7 +13,7 @@ const requiresLogin = (req, res, next) => {
 // Checks if the user is already logged in, redirects to the app if they are
 const requiresLogout = (req, res, next) => {
   if (req.session.account) {
-    return res.redirect('/maker');
+    return res.redirect('/profile');
   }
 
   return next();
