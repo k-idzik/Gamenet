@@ -120,7 +120,7 @@ const updateUsername = (request, response) => {
   return Account.AccountModel.authenticate(req.session.account.username, req.body.pass,
   (err, account) => {
     const updatedAccount = account; // Local copy to modify
-
+    console.dir(account);
     // Make sure the password is correct
     if (err || !updatedAccount) {
       return res.status(401).json({ error: 'Wrong password!' });

@@ -53,7 +53,7 @@ ProfileSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return ProfileModel.find(search).select('name age color owner').exec(callback);
+  return ProfileModel.findOne(search, callback); // Return the profile object
 };
 
 

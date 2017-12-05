@@ -50,6 +50,12 @@ const changePassword = (e) => {
 const updateProfile = (e) => {
   e.preventDefault();
 
+  // If no data is entered
+  if ($('#name').val() == '' && $('#age').val() == '' && $('#fColor').val() == '') {
+    document.querySelector('#errorMessage').textContent = 'Nothing to update!';
+    return false;
+  }
+  
   //Go to controller to update password
   sendAjax('POST', $('#updateProfileForm').attr('action'), $('#updateProfileForm').serialize(), function() {
     document.querySelector('#errorMessage').textContent = 'Profile updated!';

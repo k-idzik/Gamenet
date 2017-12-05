@@ -40,23 +40,32 @@ const updateProfile = (request, response) => {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred!' });
     }
-    // console.dir(docs);
+
     profileData = docs;
 
-    if (req.body.name !== undefined) {
-      // console.log("name");
+    // Check that the user's profile exists,
+    // if it does not, make it
+    if (profileData === null) {
+      profileData = {
+        name: '',
+        age: '',
+        color: '',
+        owner: undefined,
+      };
+    }
+
+    // Remember to check that fields are not empty
+    if (req.body.name !== '') {
       profileData.name = req.body.name;
     }
-    if (req.body.age !== undefined) {
-      // console.log("age");
+    if (req.body.age !== '') {
       profileData.age = req.body.age;
     }
-    if (req.body.fColor !== undefined) {
-      // console.log("fColor");
+    if (req.body.fColor !== '') {
       profileData.color = req.body.fColor;
     }
 
-    // console.log(profileData.owner);
+     // console.log(profileData.owner);
     let userProfile = null;
     let profilePromise = null;
     // Check if this is a new profile
@@ -65,8 +74,6 @@ const updateProfile = (request, response) => {
       userProfile = new Profile.ProfileModel(profileData);
       profilePromise = userProfile.save();
     } else {
-      profileData.owner = req.session.account._id;
-      // userProfile = Profile.ProfileModel(profileData);
       profilePromise = profileData.save();
     }
 
@@ -74,9 +81,7 @@ const updateProfile = (request, response) => {
     // Send back an empty object to avoid stupidity
     profilePromise.then(() => res.status(204).json({ }));
 
-    profilePromise.catch(() => res.status(400).json({ error: 'An error occurred' }));
-
-    return profilePromise;
+    return profilePromise.catch(() => res.status(400).json({ error: 'An error occurred' }));
   });
 };
 
