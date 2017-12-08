@@ -235,6 +235,13 @@ label {
   float: none;
 }
 
+#profileContent {
+  background-color: purple;
+  height: 100%;
+  margin: auto;
+  width: 80%;
+}
+
 #profilePhoto {
   background-color: #BB0000;
   float: left;
@@ -250,7 +257,7 @@ label {
 }
 
 #basicInfo {
-  background-color: #323232;
+  background-color: blue;
   height: 256px;
   margin-left: 256px;
   padding-top: 50px;
@@ -258,14 +265,14 @@ label {
 }
 
 #games {
-  background-color: #323232;
+  background-color: green;
   float: left;
   height: 60%;
   width: 100%;
 }
 
 #pals {
-  background-color: #323232;
+  background-color: yellow;
   float: left;
   height: 100%;
   margin-top: 50px;
