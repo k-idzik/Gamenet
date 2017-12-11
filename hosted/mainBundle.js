@@ -74,6 +74,35 @@ var setup = function setup(csrf) {
 
   //Render the Games UI
   //Games();
+
+  //Resizing elements
+  var profilePhotoDiv = document.querySelector('#profilePhotoDiv');
+  var profilePhoto = profilePhotoDiv.querySelector('#profilePhoto');
+  var basicInfoDiv = document.querySelector('#basicInfo');
+
+  //Check once on load
+  if (profilePhotoDiv.offsetWidth < 252) {
+    //Resize image
+    profilePhoto.style.width = profilePhotoDiv.offsetWidth;
+    profilePhoto.style.height = profilePhotoDiv.offsetWidth;
+
+    //Resize elements
+    profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
+    basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
+  }
+
+  //Resize profile image on element resize
+  window.onresize = function () {
+    //if (profilePhotoDiv.offsetWidth < 252) {
+    //Resize image
+    profilePhoto.style.width = profilePhotoDiv.offsetWidth;
+    profilePhoto.style.height = profilePhotoDiv.offsetWidth;
+
+    //Resize elements
+    profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
+    basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
+    //}
+  };
 };
 
 //Get the csrf token from the server

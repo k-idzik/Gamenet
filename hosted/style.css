@@ -1,11 +1,15 @@
 html, body {
-  background-color: #323232;
+  background-color: #505050;
   color: white;
   height: 100%;
   margin: 0;
   overflow-x: hidden;
   padding: 0;
   width: 100%;
+}
+
+#loginBody {
+  background-color: #323232;
 }
 
 #loginContent {
@@ -73,7 +77,7 @@ nav {
 }
 
 #user, #user1, #user2, #pass, #pass1, #pass2 {
-  border-radius: 6px;
+  border-radius: 2px;
   display: block;
   font-family: 'Raleway', sans-serif;
   font-size: 20px;
@@ -88,9 +92,10 @@ nav {
 }
 
 #name, #age, #fColor {
-  border-radius: 6px;
+  border-radius: 2px;
   font-family: 'Raleway', sans-serif;
   font-size: 20px;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -231,52 +236,60 @@ label {
   width: 200px;
 }
 
-.clear {
+/*.clear {
   float: none;
-}
+}*/
 
-#profileContent {
+#pageContent {
   background-color: purple;
   height: 100%;
   margin: auto;
+  /*overflow: hidden;*/
   width: 80%;
 }
 
-#profilePhoto {
+#profilePhotoDiv {
   background-color: #BB0000;
   float: left;
-  height: 256px;
+  height: 252px;
+  max-height: 252px;
   padding-top: 50px;
-  width: 256px;
+  width: 20%;
 }
 
-#profilePhoto img {
+#profilePhoto {
   display: block;
+  max-height: 252px;
   margin: auto;
-  padding-top: 1%;
+  max-width: 252px;
+  vertical-align: middle;
 }
 
 #basicInfo {
-  background-color: blue;
-  height: 256px;
-  margin-left: 256px;
+  background-color: #323232;
+  display: block;
+  height: 252px;
+  margin-left: 20%;
+  max-height: 252px;
   padding-top: 50px;
-  width: 100%;
+  width: 80%;
 }
 
 #games {
-  background-color: green;
+  background-color: #323232;
+  border-top: solid;
+  border-top-color: white;
+  border-top-width: 1px;
   float: left;
   height: 60%;
   width: 100%;
 }
 
 #pals {
-  background-color: yellow;
-  float: left;
+  background-color: #323232;
   height: 100%;
+  margin: auto;
   margin-top: 50px;
-  position: fixed;
   width: 100%;
 }
 
