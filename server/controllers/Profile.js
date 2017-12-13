@@ -24,7 +24,21 @@ const getProfile = (request, response) => {
       return res.status(400).json({ error: 'An error occurred!' });
     }
 
-    return res.json({ profile: docs });
+    // Check that the profile exists
+    let returnDocs = docs;
+
+    // If it doesn't, fill it out
+    // This cuts down on code client-side
+    if (returnDocs === null) {
+      returnDocs = {
+        name: 'No name',
+        age: 'Immortal',
+        color: 'N/A',
+        owner: undefined,
+      };
+    }
+
+    return res.json({ profile: returnDocs });
   });
 };
 

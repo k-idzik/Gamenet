@@ -16,18 +16,35 @@
 //};
 //
 //Populate BasicInfo UI
-const BasicInfo = () => {
-  //return;
+const BasicInfo = (props) => {
+  //props.data pulls from the data in the JSX tag
+  //It has to be specified correctly in that parameter
+  return(
+    <h1>
+      {props.data}
+    </h1>
+  );
 };
 
 //Load BasicInfo UI
 const LoadBasicInfo = () => {
-  //sendAjax('GET', '/getProfile', null, (data) => {
-  //  ReactDOM.render(
-  //    <BasicInfo profile={data.Profile} />,
-  //    document.querySelector('#basicInfo')
-  //  );
-  //});
+  //One call to get all the information we could ever want
+  sendAjax('GET', '/getProfile', null, (data) => {
+    ReactDOM.render(
+      <BasicInfo data={data.profile.name} />,
+      document.querySelector('#nameBI')
+    );
+    
+    ReactDOM.render(
+      <BasicInfo data={data.profile.age} />,
+      document.querySelector('#ageBI')
+    );
+    
+    ReactDOM.render(
+      <BasicInfo data={data.profile.color} />,
+      document.querySelector('#colorBI')
+    );
+  });
 };
 //
 ////Games UI
@@ -92,8 +109,8 @@ const setup = function(csrf) {
 
   //Resize elements
   profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
-  basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
-  gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight - 1;
+  basicInfoDiv.style.height = profilePhoto.offsetWidth; //Align with the photo size, the containing div isn't always accurate enough
+  gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight;
   
   //Resize profile image on element resize
   window.onresize = () => {
@@ -103,8 +120,8 @@ const setup = function(csrf) {
 
     //Resize elements
     profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
-    basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
-    gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight - 1;
+    basicInfoDiv.style.height = profilePhoto.offsetWidth; //Align with the photo size, the containing div isn't always accurate enough
+    gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight;
   }
 };
 

@@ -18,18 +18,26 @@
 //};
 //
 //Populate BasicInfo UI
-var BasicInfo = function BasicInfo() {
-  //return;
+var BasicInfo = function BasicInfo(props) {
+  //props.data pulls from the data in the JSX tag
+  //It has to be specified correctly in that parameter
+  return React.createElement(
+    'h1',
+    null,
+    props.data
+  );
 };
 
 //Load BasicInfo UI
 var LoadBasicInfo = function LoadBasicInfo() {
-  //sendAjax('GET', '/getProfile', null, (data) => {
-  //  ReactDOM.render(
-  //    <BasicInfo profile={data.Profile} />,
-  //    document.querySelector('#basicInfo')
-  //  );
-  //});
+  //One call to get all the information we could ever want
+  sendAjax('GET', '/getProfile', null, function (data) {
+    ReactDOM.render(React.createElement(BasicInfo, { data: data.profile.name }), document.querySelector('#nameBI'));
+
+    ReactDOM.render(React.createElement(BasicInfo, { data: data.profile.age }), document.querySelector('#ageBI'));
+
+    ReactDOM.render(React.createElement(BasicInfo, { data: data.profile.color }), document.querySelector('#colorBI'));
+  });
 };
 //
 ////Games UI
@@ -94,8 +102,8 @@ var setup = function setup(csrf) {
 
   //Resize elements
   profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
-  basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
-  gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight - 1;
+  basicInfoDiv.style.height = profilePhoto.offsetWidth; //Align with the photo size, the containing div isn't always accurate enough
+  gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight;
 
   //Resize profile image on element resize
   window.onresize = function () {
@@ -105,8 +113,8 @@ var setup = function setup(csrf) {
 
     //Resize elements
     profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
-    basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
-    gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight - 1;
+    basicInfoDiv.style.height = profilePhoto.offsetWidth; //Align with the photo size, the containing div isn't always accurate enough
+    gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight;
   };
 };
 

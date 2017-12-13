@@ -56,9 +56,6 @@ ProfileSchema.statics.findByOwner = (ownerId, callback) => {
   return ProfileModel.findOne(search, callback); // Return the profile object
 };
 
-
-// ProfileSchema.statics.getName = () => name;
-
 ProfileModel = mongoose.model('Profile', ProfileSchema);
 
 module.exports.ProfileModel = ProfileModel;
