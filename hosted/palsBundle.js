@@ -71,27 +71,39 @@
 //  });
 //};
 //
-//const setup = function(csrf) {
-//  //Render the MakeDomo UI
-//  ReactDOM.render(
-//    <DomoForm csrf={csrf} />,
-//    document.querySelector('#makeDomo')
-//  );
-//  
-//  //Render the DomoList UI
-//  ReactDOM.render(
-//    <DomoList domos={[]} />,
-//    document.querySelector('#domos')
-//  );
-//  
-//  //Load any Domos
-//  loadDomosFromServer();
-//};
+var setup = function setup(csrf) {
+  //  //Render the MakeDomo UI
+  //  ReactDOM.render(
+  //    <DomoForm csrf={csrf} />,
+  //    document.querySelector('#makeDomo')
+  //  );
+  //  
+  //  //Render the DomoList UI
+  //  ReactDOM.render(
+  //    <DomoList domos={[]} />,
+  //    document.querySelector('#domos')
+  //  );
+  //  
+  //  //Load any Domos
+  //  loadDomosFromServer();
+
+  var palsDiv = document.querySelector('#pals');
+
+  //Check once on load
+  //Resize elements
+  palsDiv.style.height = window.innerHeight - 1;
+
+  //Resize profile image on element resize
+  window.onresize = function () {
+    //Resize elements
+    palsDiv.style.height = window.innerHeight - 1;
+  };
+};
 
 //Get the csrf token from the server
 var getToken = function getToken() {
   sendAjax('GET', '/getToken', null, function (result) {
-    //      setup(result.csrfToken);
+    setup(result.csrfToken);
   });
 };
 

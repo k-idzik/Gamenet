@@ -69,7 +69,7 @@
 //  });
 //};
 //
-//const setup = function(csrf) {
+const setup = function(csrf) {
 //  //Render the MakeDomo UI
 //  ReactDOM.render(
 //    <DomoForm csrf={csrf} />,
@@ -84,12 +84,24 @@
 //  
 //  //Load any Domos
 //  loadDomosFromServer();
-//};
+  
+  let palsDiv = document.querySelector('#pals');
+  
+  //Check once on load
+  //Resize elements
+  palsDiv.style.height = window.innerHeight - 1;
+  
+  //Resize profile image on element resize
+  window.onresize = () => {
+    //Resize elements
+    palsDiv.style.height = window.innerHeight - 1;
+  }
+};
 
 //Get the csrf token from the server
 const getToken = () => {
   sendAjax('GET', '/getToken', null, (result) => {
-//      setup(result.csrfToken);
+    setup(result.csrfToken);
   });
 };
 

@@ -15,14 +15,20 @@
 //  return false;
 //};
 //
-////BasicInfo UI
-//const BasicInfo = () => {
-//  sendAjax('GET', '/getProfile', null, (data) => {
-//    ReactDOM.render(
-//      <BasicInfo domos={data.domos} />,
-//      document.querySelector('#domos')
-//    );
-//};
+//Populate BasicInfo UI
+const BasicInfo = () => {
+  //return;
+};
+
+//Load BasicInfo UI
+const LoadBasicInfo = () => {
+  //sendAjax('GET', '/getProfile', null, (data) => {
+  //  ReactDOM.render(
+  //    <BasicInfo profile={data.Profile} />,
+  //    document.querySelector('#basicInfo')
+  //  );
+  //});
+};
 //
 ////Games UI
 //const Games = () => {
@@ -68,7 +74,7 @@
 //
 const setup = function(csrf) {
   //Render the BasicInfo UI
-  //BasicInfo();
+  LoadBasicInfo();
   
   //Render the Games UI
   //Games();
@@ -77,29 +83,28 @@ const setup = function(csrf) {
   let profilePhotoDiv = document.querySelector('#profilePhotoDiv');
   let profilePhoto = profilePhotoDiv.querySelector('#profilePhoto');
   let basicInfoDiv = document.querySelector('#basicInfo');
+  let gamesDiv = document.querySelector('#games');
   
   //Check once on load
-  if (profilePhotoDiv.offsetWidth < 252) {
-    //Resize image
-    profilePhoto.style.width = profilePhotoDiv.offsetWidth;
-    profilePhoto.style.height = profilePhotoDiv.offsetWidth;
-    
-    //Resize elements
-    profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
-    basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
-  }
+  //Resize image
+  profilePhoto.style.width = profilePhotoDiv.offsetWidth;
+  profilePhoto.style.height = profilePhotoDiv.offsetWidth;
+
+  //Resize elements
+  profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
+  basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
+  gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight - 1;
   
   //Resize profile image on element resize
   window.onresize = () => {
-    //if (profilePhotoDiv.offsetWidth < 252) {
-      //Resize image
-      profilePhoto.style.width = profilePhotoDiv.offsetWidth;
-      profilePhoto.style.height = profilePhotoDiv.offsetWidth;
+    //Resize image
+    profilePhoto.style.width = profilePhotoDiv.offsetWidth;
+    profilePhoto.style.height = profilePhotoDiv.offsetWidth;
 
-      //Resize elements
-      profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
-      basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
-    //}
+    //Resize elements
+    profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
+    basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
+    gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight - 1;
   }
 };
 

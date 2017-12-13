@@ -17,14 +17,20 @@
 //  return false;
 //};
 //
-////BasicInfo UI
-//const BasicInfo = () => {
-//  sendAjax('GET', '/getProfile', null, (data) => {
-//    ReactDOM.render(
-//      <BasicInfo domos={data.domos} />,
-//      document.querySelector('#domos')
-//    );
-//};
+//Populate BasicInfo UI
+var BasicInfo = function BasicInfo() {
+  //return;
+};
+
+//Load BasicInfo UI
+var LoadBasicInfo = function LoadBasicInfo() {
+  //sendAjax('GET', '/getProfile', null, (data) => {
+  //  ReactDOM.render(
+  //    <BasicInfo profile={data.Profile} />,
+  //    document.querySelector('#basicInfo')
+  //  );
+  //});
+};
 //
 ////Games UI
 //const Games = () => {
@@ -70,7 +76,7 @@
 //
 var setup = function setup(csrf) {
   //Render the BasicInfo UI
-  //BasicInfo();
+  LoadBasicInfo();
 
   //Render the Games UI
   //Games();
@@ -79,21 +85,20 @@ var setup = function setup(csrf) {
   var profilePhotoDiv = document.querySelector('#profilePhotoDiv');
   var profilePhoto = profilePhotoDiv.querySelector('#profilePhoto');
   var basicInfoDiv = document.querySelector('#basicInfo');
+  var gamesDiv = document.querySelector('#games');
 
   //Check once on load
-  if (profilePhotoDiv.offsetWidth < 252) {
-    //Resize image
-    profilePhoto.style.width = profilePhotoDiv.offsetWidth;
-    profilePhoto.style.height = profilePhotoDiv.offsetWidth;
+  //Resize image
+  profilePhoto.style.width = profilePhotoDiv.offsetWidth;
+  profilePhoto.style.height = profilePhotoDiv.offsetWidth;
 
-    //Resize elements
-    profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
-    basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
-  }
+  //Resize elements
+  profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
+  basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
+  gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight - 1;
 
   //Resize profile image on element resize
   window.onresize = function () {
-    //if (profilePhotoDiv.offsetWidth < 252) {
     //Resize image
     profilePhoto.style.width = profilePhotoDiv.offsetWidth;
     profilePhoto.style.height = profilePhotoDiv.offsetWidth;
@@ -101,7 +106,7 @@ var setup = function setup(csrf) {
     //Resize elements
     profilePhotoDiv.style.height = profilePhotoDiv.offsetWidth;
     basicInfoDiv.style.height = profilePhotoDiv.offsetWidth;
-    //}
+    gamesDiv.style.height = window.innerHeight - profilePhotoDiv.offsetHeight - 1;
   };
 };
 

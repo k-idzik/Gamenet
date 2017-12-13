@@ -241,7 +241,7 @@ label {
 }*/
 
 #pageContent {
-  background-color: purple;
+  background-color: #323232;
   height: 100%;
   margin: auto;
   /*overflow: hidden;*/
@@ -253,7 +253,6 @@ label {
   float: left;
   height: 252px;
   max-height: 252px;
-  padding-top: 50px;
   width: 20%;
 }
 
@@ -268,11 +267,63 @@ label {
 #basicInfo {
   background-color: #323232;
   display: block;
-  height: 252px;
   margin-left: 20%;
+  margin-top: 51px;
   max-height: 252px;
-  padding-top: 50px;
   width: 80%;
+}
+
+#nameLabel, #nameBI, #ageLabel, #ageBI, #colorLabel, #colorBI {
+  /*background-color: #323232;*/
+  float: left;
+  width: 33.3%;
+}
+
+#nameLabel, #ageLabel, #colorLabel {
+  background-color: #BB0000;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  height: 35%;
+  text-align: center;
+}
+
+#nameLabel h2, #ageLabel h2, #colorLabel h2 {
+  padding-top: 10px;
+}
+
+#nameLabel, #nameBI {
+  border-left: solid;
+  border-left-color: white;
+  border-left-width: 2px;
+  border-right: solid;
+  border-right-color: white;
+  border-right-width: 2px;
+  box-sizing: border-box;
+}
+
+#colorLabel, #colorBI {
+  border-left: solid;
+  border-left-color: white;
+  border-left-width: 2px;
+  border-right: solid;
+  border-right-color: white;
+  border-right-width: 2px;
+  box-sizing: border-box;
+}
+
+#nameBI {
+  background-color: cyan;
+  height: 65%;
+}
+
+#ageBI {
+  background-color: magenta;
+  height: 65%;
+}
+
+#colorBI {
+  background-color: yellow;
+  height: 65%;
 }
 
 #games {
@@ -287,9 +338,9 @@ label {
 
 #pals {
   background-color: #323232;
+  display: block;
   height: 100%;
   margin: auto;
-  margin-top: 50px;
   width: 100%;
 }
 
