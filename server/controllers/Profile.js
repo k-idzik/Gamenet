@@ -37,8 +37,19 @@ const getProfile = (request, response) => {
         color: 'N/A',
         owner: req.session.account._id,
       };
-      
-      Profile.ProfileModel(returnDocs).save(); //Save the new profile in the database
+
+      // Save the new profile in the database
+      let userProfile = null;
+      let profilePromise = null;
+
+      userProfile = new Profile.ProfileModel(returnDocs);
+      profilePromise = userProfile.save();
+
+      // Promise
+      // Send back an empty object to avoid stupidity
+      profilePromise.then(() => res.status(204).json({ profile: returnDocs }));
+
+      return profilePromise.catch(() => res.status(400).json({ profile: returnDocs }));
     }
 
     return res.json({ profile: returnDocs });
