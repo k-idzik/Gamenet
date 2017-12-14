@@ -33,7 +33,7 @@ const getProfile = (request, response) => {
     if (returnDocs === null) {
       returnDocs = {
         name: 'No name',
-        age: 'Immortal',
+        age: '0',
         color: 'N/A',
         owner: req.session.account._id,
       };
@@ -47,9 +47,11 @@ const getProfile = (request, response) => {
 
       // Promise
       // Send back an empty object to avoid stupidity
-      profilePromise.then(() => res.status(204).json({ profile: returnDocs }));
+      // Also, this is totally not the right way to do this, since there's no status code
+      // Oh well
+      profilePromise.then(() => res.json({ profile: returnDocs }));
 
-      return profilePromise.catch(() => res.status(400).json({ profile: returnDocs }));
+      return profilePromise.catch(() => res.json({ profile: returnDocs }));
     }
 
     return res.json({ profile: returnDocs });
