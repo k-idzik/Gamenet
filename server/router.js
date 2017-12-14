@@ -6,7 +6,9 @@ const router = (app) => {
   // URL, middleware, controller
   app.get('/getToken', mid.requiresSecure, controllers.Account.getToken);
   app.get('/getProfile', mid.requiresLogin, controllers.Profile.getProfile);
+  app.get('/getMyPals', mid.requiresLogin, controllers.Profile.getMyPals);
   app.get('/getAllPals', mid.requiresLogin, controllers.Profile.getAllPals);
+  app.post('/addPal', mid.requiresSecure, controllers.Profile.addPal);
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);

@@ -61,14 +61,22 @@
 //  );
 //};
 
-//Load all pals from the server and render a DomoList
-var GetAllPals = function GetAllPals(props) {
+//Load my pals from the server and render a PalList
+var GetMyPals = function GetMyPals(props) {
+  if (props.pals.length === 0) {
+    return React.createElement(
+      'h1',
+      null,
+      'You have no pals!'
+    );
+  }
+
   //Create UI for each pal
   //map is used to rip shit from arrays or whatever
   var palNodes = props.pals.profile.map(function (pal) {
     return React.createElement(
-      'button',
-      { className: 'pal', id: pal.owner },
+      'form',
+      { className: 'pal', id: pal.owner, onMouseUp: VisitPal },
       React.createElement('img', { src: '/assets/img/profilePhoto.png', alt: pal.name, className: 'palIcon' }),
       React.createElement(
         'h3',
@@ -81,7 +89,8 @@ var GetAllPals = function GetAllPals(props) {
         { className: 'palAge' },
         'Age: ',
         pal.age
-      )
+      ),
+      React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf })
     );
   });
 
@@ -92,79 +101,99 @@ var GetAllPals = function GetAllPals(props) {
   );
 };
 
-//Add listeners for your pals
-var MyPalPageListeners = function MyPalPageListeners(palList) {
-  palList = document.querySelectorAll('.pal'); //Recapture pals
+//Load all pals from the server and render a PalList
+var GetAllPals = function GetAllPals(props) {
+  //Create UI for each pal
+  //map is used to rip shit from arrays or whatever
+  var palNodes = props.pals.profile.map(function (pal) {
+    return React.createElement(
+      'form',
+      { className: 'pal', onMouseUp: AddPal },
+      React.createElement('img', { src: '/assets/img/profilePhoto.png', alt: pal.name, className: 'palIcon' }),
+      React.createElement(
+        'h3',
+        { className: 'palName' },
+        'Name: ',
+        pal.name
+      ),
+      React.createElement(
+        'h3',
+        { className: 'palAge' },
+        'Age: ',
+        pal.age
+      ),
+      React.createElement('input', { type: 'hidden', name: 'pal', value: pal.owner }),
+      React.createElement('input', { type: 'hidden', name: '_csrf', value: props.csrf })
+    );
+  });
 
-  for (var i = 0; i < palList.length; i++) {
-    palList[i].removeEventListener('mouseup', VisitPal); //Remove event listener to prevent duplicates
-    palList[i].removeEventListener('mouseup', AddPal); //Remove event listener to prevent duplicates
-
-    palList[i].addEventListener('mouseup', VisitPal);
-  }
+  return React.createElement(
+    'div',
+    { className: 'palList' },
+    palNodes
+  );
 };
 
 //When visiting a pal
-var VisitPal = function VisitPal() {};
-
-//Add listeners for all pals
-var AllPalPageListeners = function AllPalPageListeners(palList) {
-  palList = document.querySelectorAll('.pal'); //Recapture pals
-
-  for (var i = 0; i < palList.length; i++) {
-    palList[i].removeEventListener('mouseup', VisitPal); //Remove event listener to prevent duplicates
-    palList[i].removeEventListener('mouseup', AddPal); //Remove event listener to prevent duplicates
-
-    palList[i].addEventListener('mouseup', AddPal);
-  }
+var VisitPal = function VisitPal(pal) {
+  console.log('Visit');
 };
 
 //When adding pals
-var AddPal = function AddPal() {};
+var AddPal = function AddPal(e) {
+  e.preventDefault();
+
+  //Go to controller to add pal
+  sendAjax('POST', '/addPal', $(e.target).serialize(), function () {
+    document.querySelector('#info').textContent = 'Pal added!';
+  });
+};
 
 var setup = function setup(csrf) {
   var main = document.querySelector('#pals');
   var pals0 = document.querySelector('#pals0');
   var pals1 = document.querySelector('#pals1');
   var info = document.querySelector('#info');
-  var palList = []; //Select all the pals when needed
+  var currentlyRenderedMyPals = void 0; //What page is currently rendered
 
   pals0.style.borderBottomColor = 'white'; //Default selected
 
   //Sidebar linking
   pals0.addEventListener('mouseup', function (e) {
-    sendAjax('GET', '/getAllPals', null, function (data) {
-      ReactDOM.render(React.createElement(GetAllPals, { pals: data }), main);
-    });
+    if (!currentlyRenderedMyPals) {
+      sendAjax('GET', '/getMyPals', null, function (data) {
+        ReactDOM.render(React.createElement(GetMyPals, { pals: data, csrf: csrf }), main);
+      });
 
-    //Update selected
-    pals0.style.borderBottomColor = 'white';
-    pals1.style.borderBottomColor = '#BB0000';
+      //Update selected
+      pals0.style.borderBottomColor = 'white';
+      pals1.style.borderBottomColor = '#BB0000';
 
-    info.innerHTML = 'Click a pal to visit!';
-
-    MyPalPageListeners(palList); //Set up the pal listeners
+      info.innerHTML = 'Click a pal to visit!';
+      currentlyRenderedMyPals = true;
+    }
   });
   pals1.addEventListener('mouseup', function (e) {
-    sendAjax('GET', '/getAllPals', null, function (data) {
-      ReactDOM.render(React.createElement(GetAllPals, { pals: data }), main);
-    });
+    if (currentlyRenderedMyPals) {
+      sendAjax('GET', '/getAllPals', null, function (data) {
+        ReactDOM.render(React.createElement(GetAllPals, { pals: data, csrf: csrf }), main);
+      });
 
-    //Update selected
-    pals0.style.borderBottomColor = '#BB0000';
-    pals1.style.borderBottomColor = 'white';
+      //Update selected
+      pals0.style.borderBottomColor = '#BB0000';
+      pals1.style.borderBottomColor = 'white';
 
-    info.innerHTML = 'Click to add a pal!';
-
-    AllPalPageListeners(palList); //Set up the pal listeners
+      info.innerHTML = 'Click to add a pal!';
+      currentlyRenderedMyPals = false;
+    }
   });
 
   //Render the user pals list by default
-  sendAjax('GET', '/getAllPals', null, function (data) {
-    ReactDOM.render(React.createElement(GetAllPals, { pals: data }), main);
+  sendAjax('GET', '/getMyPals', null, function (data) {
+    ReactDOM.render(React.createElement(GetMyPals, { pals: data, csrf: csrf }), main);
 
     info.innerHTML = 'Click a pal to visit!';
-    MyPalPageListeners(palList); //Set up the pal listeners
+    currentlyRenderedMyPals = true;
   });
 
   var palsDiv = document.querySelector('#pals');

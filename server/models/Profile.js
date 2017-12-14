@@ -29,6 +29,12 @@ const ProfileSchema = new mongoose.Schema({
     trim: true,
   },
 
+  pals: {
+    type: Array,
+    value: [],
+    required: false,
+  },
+
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -45,6 +51,7 @@ ProfileSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,
   color: doc.color,
+  pals: doc.pals,
   owner: doc.owner,
 });
 
@@ -54,6 +61,15 @@ ProfileSchema.statics.findByOwner = (ownerId, callback) => {
   };
 
   return ProfileModel.findOne(search, callback); // Return the profile object
+};
+
+// Return my profiles
+ProfileSchema.statics.findMyProfiles = (ownerId, callback) => {
+  const search = {
+    owner: convertId(ownerId),
+  };
+
+  ProfileModel.findOne(search).select('pals').exec(callback);
 };
 
 // Return all profiles
