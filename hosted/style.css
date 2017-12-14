@@ -135,7 +135,7 @@ nav {
   transition: background-color 0.4s ease;
 }
 
-.formChange:focus, .formSubmit:focus,  {
+.formChange:focus, .formSubmit:focus, .pal:focus {
   outline: 0; /*Prevents blue outlines on buttons*/
 }
 
@@ -322,12 +322,6 @@ label {
 
 #myPals, #allPals {
   background-color: #BB0000;
-  border-bottom: solid;
-  border-bottom-color: white;
-  border-bottom-width: 1px;
-  border-right: solid;
-  border-right-color: white;
-  border-right-width: 1px;
   box-sizing: border-box;
   color: white;
   display: block;
@@ -352,7 +346,7 @@ label {
   margin-bottom: 0px;
   margin-top: 8px;
   padding: 5px;
-  padding-bottom: 8px;
+  padding-bottom: 9px;
   text-decoration: none;
 }
 
@@ -363,10 +357,27 @@ label {
   transition: border-bottom-color .65s ease-in-out;
 }
 
-#myPals {
+#allPals {
   border-left: solid;
   border-left-color: white;
   border-left-width: 1px;
+}
+
+#info {
+  background-color: #BB0000;
+  border-top: solid;
+  border-top-color: white;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: white;
+  display: block;
+  font-family: 'Play', sans-serif;
+  font-size: 16px;
+  height: 20px;
+  margin: auto;
+  overflow-y: auto;
+  text-align: center;
+  width: 100%;
 }
 
 #pals {
@@ -436,10 +447,12 @@ label {
 }*/
 
 .pal {
-  background-color: #606060;
-  border: 2px solid #606060;
-  border-radius: 4px;
-  margin: 0 auto;
+  background-color: #505050;
+  border: 2px solid #8B0000;
+  color: white;
+  display: block;
+  font-family: 'Play', sans-serif;
+  margin: auto;
   margin-bottom: 2px;
   margin-top: 2px;
   min-height:60px;
@@ -449,20 +462,24 @@ label {
 }
 
 .pal:hover {
-  background-color: #707070;
-  border-color: rgba(255, 255, 255, 0.8);
-  transition: background-color 2.6s ease-out;
-  transition: border-color 0.2s ease-out;
+  border-color: #BB0000;
+  cursor: pointer;
+  transition: border-color .65s ease-in-out;
 }
 
 img.palIcon {
-  border-radius: 4px;
+  border: 2px solid #8B0000;
   float:left;
   height: 50px;
   margin-left: 25px;
   margin-right: 10px;
   margin-top:10px;
   width: 50px;
+}
+
+.pal:hover img.palIcon {
+  border-color: #BB0000;
+  transition: border-color .65s ease-in-out;
 }
 
 h3.emptyPal {
