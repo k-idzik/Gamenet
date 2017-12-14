@@ -35,8 +35,10 @@ const getProfile = (request, response) => {
         name: 'No name',
         age: 'Immortal',
         color: 'N/A',
-        owner: undefined,
+        owner: req.session.account._id,
       };
+      
+      Profile.ProfileModel(returnDocs).save(); //Save the new profile in the database
     }
 
     return res.json({ profile: returnDocs });
