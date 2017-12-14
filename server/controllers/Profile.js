@@ -14,6 +14,7 @@ const makerPage = (req, res) => {
   });
 };
 
+// Get the user's profile information
 const getProfile = (request, response) => {
   const req = request;
   const res = response;
@@ -41,6 +42,18 @@ const getProfile = (request, response) => {
     return res.json({ profile: returnDocs });
   });
 };
+
+// Get all pals
+const getAllPals = (request, response) =>
+  Profile.ProfileModel.findAllProfiles((err, docs) => {
+    if (err) {
+      console.log(err);
+      return response.status(400).json({ error: 'An error occurred!' });
+    }
+
+    return response.json({ profile: docs });
+  }
+);
 
 // Update the user's profile
 const updateProfile = (request, response) => {
@@ -106,5 +119,6 @@ const palsPage = (req, res) => {
 
 module.exports.profilePage = makerPage;
 module.exports.getProfile = getProfile;
+module.exports.getAllPals = getAllPals;
 module.exports.updateProfile = updateProfile;
 module.exports.palsPage = palsPage;

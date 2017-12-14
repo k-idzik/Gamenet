@@ -182,6 +182,7 @@ settingsNav {
   border-left-color: #BB0000;
   border-left-width: 4px;
   color: white;
+  cursor: pointer;
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
   margin-bottom: 0px;
@@ -197,7 +198,7 @@ settingsNav {
   transition: border-left-color .65s ease-in-out;
 }
 
-.settingsNavlink button:focus {
+.settingsNavlink button:focus, #myPals button:focus, #allPals button:focus {
   outline: 0;
 }
 
@@ -319,11 +320,61 @@ label {
   width: 100%;
 }
 
+#myPals, #allPals {
+  background-color: #BB0000;
+  border-bottom: solid;
+  border-bottom-color: white;
+  border-bottom-width: 1px;
+  border-right: solid;
+  border-right-color: white;
+  border-right-width: 1px;
+  box-sizing: border-box;
+  color: white;
+  display: block;
+  float: left;
+  font-family: 'Raleway', sans-serif;
+  height: 50px;
+  margin-top: 51px;
+  text-align: center;
+  width: 50%;
+}
+
+#myPals button, #myPals button:link, #myPals button:visited, #myPals button:hover, #myPals button:active, #allPals button, #allPals button:link, #allPals button:visited, #allPals button:hover, #allPals button:active {
+  background-color: #BB0000;
+  border: none;
+  border-bottom: solid;
+  border-bottom-color: #BB0000;
+  border-bottom-width: 4px;
+  color: white;
+  cursor: pointer;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  margin-bottom: 0px;
+  margin-top: 8px;
+  padding: 5px;
+  padding-bottom: 8px;
+  text-decoration: none;
+}
+
+#myPals button:hover, #allPals button:hover {
+  border-bottom: solid;
+  border-bottom-color: white;
+  border-bottom-width: 4px;
+  transition: border-bottom-color .65s ease-in-out;
+}
+
+#myPals {
+  border-left: solid;
+  border-left-color: white;
+  border-left-width: 1px;
+}
+
 #pals {
   background-color: #323232;
   display: block;
-  height: 100%;
+  height: 90%;
   margin: auto;
+  overflow-y: auto;
   width: 100%;
 }
 
@@ -373,8 +424,7 @@ label {
   transition: background-color 0.4s ease;
 }*/
 
-/*
-#domo {
+/*#domo {
   -ms-transform: rotate(330deg);
   -webkit-transform: rotate(330deg); 
   height: 450px;
@@ -383,9 +433,9 @@ label {
   transform: rotate(330deg);
   width: 300px;
   z-index: 225;
-}
+}*/
 
-.domo {
+.pal {
   background-color: #606060;
   border: 2px solid #606060;
   border-radius: 4px;
@@ -398,14 +448,14 @@ label {
   width: 95%;
 }
 
-.domo:hover {
+.pal:hover {
   background-color: #707070;
   border-color: rgba(255, 255, 255, 0.8);
   transition: background-color 2.6s ease-out;
   transition: border-color 0.2s ease-out;
 }
 
-img.domoFace {
+img.palIcon {
   border-radius: 4px;
   float:left;
   height: 50px;
@@ -415,7 +465,7 @@ img.domoFace {
   width: 50px;
 }
 
-h3.emptyDomo {
+h3.emptyPal {
   font-size: 1.5em;
   margin: 0 auto;
   margin-top: 18px;
@@ -423,7 +473,7 @@ h3.emptyDomo {
   width: 400px;
 }
 
-h3.domoName {
+h3.palName {
   float: left;
   font-weight: bold;
   font-size: 1.5em;
@@ -431,7 +481,7 @@ h3.domoName {
   width: 200px;
 }
 
-h3.domoAge {
+h3.palAge {
   float:right;
   font-size: 1.5em;
   font-weight: bold;
@@ -440,10 +490,10 @@ h3.domoAge {
   width: 100px;
 }
 
-.domo:first-child {
+.pal:first-child {
   margin-top: 10px;
 }
 
-.domo:last-child {
+.pal:last-child {
   margin-bottom:10px;
-}*/
+}

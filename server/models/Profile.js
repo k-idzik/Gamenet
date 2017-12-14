@@ -56,6 +56,10 @@ ProfileSchema.statics.findByOwner = (ownerId, callback) => {
   return ProfileModel.findOne(search, callback); // Return the profile object
 };
 
+// Return all profiles
+ProfileSchema.statics.findAllProfiles = (callback) =>
+  ProfileModel.find().select('name age').exec(callback);
+
 ProfileModel = mongoose.model('Profile', ProfileSchema);
 
 module.exports.ProfileModel = ProfileModel;

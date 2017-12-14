@@ -58,17 +58,28 @@
 //    </dim>
 //  );
 //};
-//
-////Load Domos from the server and render a DomoList
-//const loadDomosFromServer = () => {
-//  sendAjax('GET', '/getProfile', null, (data) => {
-//    ReactDOM.render(
-//      <DomoList domos={data.domos} />,
-//      document.querySelector('#domos')
-//    );
-//  });
-//};
-//
+
+//Load all pals from the server and render a DomoList
+const GetAllPals = (props) => {
+  //Create UI for each pal
+  //map is used to rip shit from arrays or whatever
+  const palNodes = props.pals.profile.map(function(pal) {
+    return(
+      <div key={pal._id} className='pal'>
+        <img src='/assets/img/profilePhoto.png' alt={pal.name} className='palIcon' />
+        <h3 className='palName'>Name: {pal.name}</h3>
+        <h3 className='palAge'>Age: {pal.age}</h3>
+      </div>
+    );
+  });
+  
+  return(
+    <div className='palList'>
+      {palNodes}
+    </div>
+  );
+};
+
 const setup = function(csrf) {
 //  //Render the MakeDomo UI
 //  ReactDOM.render(
@@ -81,20 +92,57 @@ const setup = function(csrf) {
 //    <DomoList domos={[]} />,
 //    document.querySelector('#domos')
 //  );
-//  
-//  //Load any Domos
-//  loadDomosFromServer();
+//
+  const main = document.querySelector('#pals');
+  const pals0 = document.querySelector('#pals0');
+  const pals1 = document.querySelector('#pals1');
+  
+  pals0.style.borderBottomColor = 'white'; //Default selected
+  
+  //Sidebar linking
+  pals0.addEventListener('mouseup', (e) => {
+    sendAjax('GET', '/getAllPals', null, (data) => {
+      ReactDOM.render(
+        <GetAllPals pals={data} />,
+        main
+      );
+    });
+    
+    //Update selected
+    pals0.style.borderBottomColor = 'white';
+    pals1.style.borderBottomColor = '#BB0000';
+  });
+  pals1.addEventListener('mouseup', (e) => {
+    sendAjax('GET', '/getAllPals', null, (data) => {
+      ReactDOM.render(
+        <GetAllPals pals={data} />,
+        main
+      );
+    });
+    
+    //Update selected
+    pals0.style.borderBottomColor = '#BB0000';
+    pals1.style.borderBottomColor = 'white';
+  });
+  
+  //Render the user pals list by default
+  sendAjax('GET', '/getAllPals', null, (data) => {
+      ReactDOM.render(
+        <GetAllPals pals={data} />,
+        main
+      );
+  });
   
   let palsDiv = document.querySelector('#pals');
   
   //Check once on load
   //Resize elements
-  palsDiv.style.height = window.innerHeight - 1;
+  palsDiv.style.height = window.innerHeight - 101;
   
   //Resize profile image on element resize
   window.onresize = () => {
     //Resize elements
-    palsDiv.style.height = window.innerHeight - 1;
+    palsDiv.style.height = window.innerHeight - 101;
   }
 };
 
